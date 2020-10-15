@@ -13,9 +13,11 @@ library(tidyverse)
 # Data  
 ```{r}
 url <- "https://archive.ics.uci.edu/ml/machine-learning-databases/00275/Bike-Sharing-Dataset.zip"
+
 download.file(url, "Bike-Sharing-Dataset.zip")
-unzip("Bike-Sharing-Dataset.zip")
-df.bike <- read_csv("day.csv")
+
+unzip("Bike-Sharing-Dataset.zip", exdir = "./Data")
+df.bike <- read_csv("/Data/day.csv")
 head(df.bike)
 ```
 
