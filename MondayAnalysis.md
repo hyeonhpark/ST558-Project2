@@ -61,13 +61,32 @@ df.test <- df.bike.day[test, ]
 # Summarizations
 
 ``` r
-ggplot(df.train, aes(x = dteday, y = cnt)) +
-  geom_point(aes(colour = factor(season)))
+# Full data
+df.bike <- df.bike %>%  
+  mutate(dayofweek = recode(weekday,
+                            `0` = "Sunday",
+                            `1` = "Monday",
+                            `2` = "Tuesday",
+                            `3` = "Wednesday",
+                            `4` = "Thursday",
+                            `5` = "Friday",
+                            `6` = "Saturday"))
+
+ggplot(df.bike, aes(x = dayofweek)) +
+  geom_bar()
 ```
 
 ![](MondayAnalysis_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->
 
 ``` r
+ggplot(df.bike, aes(x = dteday, y = cnt)) +
+  geom_point(aes(colour = factor(holiday)))
+```
+
+![](MondayAnalysis_files/figure-gfm/unnamed-chunk-2-2.png)<!-- -->
+
+``` r
+# Specific day data
 df.train %>%
   gather(temp, atemp, hum, windspeed, key = "var", value = "value") %>%
   ggplot(aes(x = value, y = cnt, color = factor(yr), shape = factor(season))) +
@@ -78,4 +97,4 @@ df.train %>%
 
     ## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
 
-![](MondayAnalysis_files/figure-gfm/unnamed-chunk-2-2.png)<!-- -->
+![](MondayAnalysis_files/figure-gfm/unnamed-chunk-2-3.png)<!-- -->
