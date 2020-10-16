@@ -44,15 +44,15 @@ The original data set is related to the two-year historical log corresponding to
 - registered: count of registered users  
 - cnt: count of total rental bikes including both casual and registered  
 
-A tree-based model chosen using leave one out cross validation(LOOCV) and a boosted tree model chosen using cross-validation are used to model the count of total rental bikes (cnt). Some variables from the original data set were removed/transformed from the models to avoid multicollinearity. Variables season and month (mnth), as well as variables temp and atemp, were highly correlated with each other according to the [correlation plot](correlation-plot-1.png). Variable month (mnth) was chosen over variable season to minimize the loss of information and also because month was more highly correlated with the response variable (cnt) than season. Variables temp and atemp were combined and their average was used in the models. Thus, the predictor variables used in the models are year (yr), month (mnth), holiday, weather (weathersit), average temperature (average of temp and atemp), humidity (hum), and wind speed (windspeed). 
+A tree-based model chosen using leave one out cross validation(LOOCV) and a boosted tree model chosen using cross-validation are used to model the count of total rental bikes (cnt). Some variables from the original data set were removed/transformed from the models to avoid multicollinearity. Variables season and month (mnth), as well as variables temp and atemp, were highly correlated with each other according to the [correlation plot](correlation-plot-1.png). Variable month (mnth) was chosen over variable season to minimize the loss of information and also because month was more highly correlated with the response variable (cnt) than season. Variables temp and atemp were combined and their average was used in the models. Variables day of the week (weekday) and working day were removed from the models due to their irrelevance. Thus, the predictor variables used in the models are year (yr), month (mnth), holiday, weather (weathersit), average temperature (average of temp and atemp), humidity (hum), and wind speed (windspeed). 
 
 # Data  
 ```{r, message = FALSE, warning = FALSE}
 # Read in data
 url <- "https://archive.ics.uci.edu/ml/machine-learning-databases/00275/Bike-Sharing-Dataset.zip"
 download.file(url, "Bike-Sharing-Dataset.zip")
-
 unzip("Bike-Sharing-Dataset.zip", exdir = "./Data")
+
 df.bike <- read_csv("/Data/day.csv") %>%
   select(-instant, -casual, -registered) %>%
   mutate(dayofweek = dplyr::recode(weekday,
@@ -66,11 +66,13 @@ df.bike <- read_csv("/Data/day.csv") %>%
   #Combine variables temp and atemp 
   mutate(avgTemp = (temp+atemp)/2)
 
+# Filter by specific day of week
 df.bike.day <- df.bike %>%
   filter(weekday == 1)
 
 #Randomply sample from the data 
 #Form training and test sets
+set.seed(1109)
 train <- sample(1:nrow(df.bike.day), size = nrow(df.bike.day)*0.7)
 test <- dplyr::setdiff(1:nrow(df.bike.day), train)
 df.train <- df.bike.day[train, ]
@@ -80,15 +82,19 @@ df.test <- df.bike.day[test, ]
 # Summarizations  
 ## Full Data  
 
-Original data is used for full data exploratory analysis.  
+In this section, summary statistics and plots about the original data are provided.
 
 #### Figure 1. Correlation plot  
-```{r correlation-plot, fig.cap = "Correlation Plot"}
+Correlation between all pairs of variables are visualized. High correlations are observed between variables season and month and between temp and atemp.  
+
+```{r full-data-correlation-plot, fig.cap = "Correlation Plot"}
 corrplot(cor(df.bike[,2:13]))
 ```
 
 #### Table 1. Qualitative variables: Contingency tables  
-```{r}
+Counts of number of holidays and counts of each weather category are provided for each day of week. Factor levels of variable weathersit was re-labeled as Good (1), Moderate (2), Bad (3), and Extreme (4). In years 2011 and 2012, no extreme weather was observed.  
+
+```{r full-data-contingency-table}
 df.tbl <- apply_labels(df.bike,
                        dteday = "Date",
                        holiday = "Holiday",
@@ -113,46 +119,71 @@ detach(df.tbl)
 ```
 
 #### Figure 2. Histograms of quantitative variables    
-```{r}
+Histograms of the three quantitative variables (humidity, average temperature, and wind speed) are provided. All three variables appear approximately normal. Variables humidity and wind speed have outliers.  
+
+```{r full-data-histograms}
 df.bike %>%
   gather(avgTemp, hum, windspeed, key = "var", value = "value") %>%
   mutate(var = factor(var, levels = c("hum", "avgTemp", "windspeed"))) %>%
   ggplot(aes(x = value)) +
   geom_histogram(bins = 50) +
-  facet_wrap(~var, scales = "free", nrow = 2) 
+  xlab("") +
+  ylab("Frequency") +
+  facet_wrap(~var, scales = "free", nrow = 2,
+             labeller = as_labeller(c(hum = "Humidity", 
+                                      avgTemp = "Average Temperature",
+                                      windspeed = "Wind Speed"))) 
 ```
 
 #### Figure 3. Scatterplot of response variable(cnt) over days    
-```{r}
-ggplot(df.bike, aes(x = dteday, y = cnt)) +
-  geom_point(aes(colour = factor(holiday)))
+Counts of total rental bikes are plotted against days. Counts were generally higher in year 2012 than 2011, and counts were generally higher in warmer months (June - September) than in colder months. Whether a day was a holiday or not didn't seem increase or decrease the count when compared to the counts of bike rentals made a few days before and after the holiday.     
+
+```{r full-data-scatterplot}
+df.bike %>%
+  mutate(Holiday = ifelse(holiday == 0, "No", "Yes")) %>%
+  ggplot(aes(x = dteday, y = cnt)) +
+  geom_point(aes(colour = Holiday)) +
+  xlab("Date") +
+  ylab("Count of Total Rental Bikes")
 ```
 
 ## Specific Day of the Week Data  
 
-Training data is used.  
+In this section, summary statistics and plots about the training data used for modeling are provided. All statistics and plots are generated from data set consisting of a specific day of the week only: Monday.  
 
 #### Table 2. Qualitative variables: Contingency tables  
-```{r}
+Counts of variables year, holiday, and weather are displayed for each month.  
+
+```{r day-data-contingency-table}
 df.tbl.train <- apply_labels(df.train,
-                       holiday = "Holiday",
-                       holiday = c("No" = 0,
-                                   "Yes" = 1),
-                       weathersit = "Weather",
-                       weathersit = c("Good" = 1,
-                                      "Moderate" = 2,
-                                      "Bad" = 3,
-                                      "Extreme" = 4),
-                       dayofweek = "Day of Week")
+                             dteday = "Date",
+                             holiday = "Holiday",
+                             holiday = c("No" = 0,
+                                         "Yes" = 1),
+                             weathersit = "Weather",
+                             weathersit = c("Good" = 1,
+                                            "Moderate" = 2,
+                                            "Bad" = 3,
+                                            "Extreme" = 4),
+                             dayofweek = "Day of Week",
+                             yr = "Year",
+                             mnth = "Month",
+                             avgTemp = "Average Temperature",
+                             hum = "Humidity",
+                             windspeed = "Wind Speed",
+                             cnt = "Count of Total Rental Bikes")
+                       
 attach(df.tbl.train)
-cro_cases(weathersit, mnth,
+cro_cases(list(yr, holiday,weathersit), mnth,
           total_row_position = "none")
 detach(df.tbl.train)
 
 ```
 
 #### Table 3. Quantitative variables: Summary statistics  
-```{r}
+Minimum, median, mean, and max of the three qualitative variables (average temperature, humidity, and wind speed) are displayed.    
+
+```{r day-data-summary-statistics-table}
 df.tbl.train %>%
   tab_cells(avgTemp, hum, windspeed) %>%
   tab_cols(mnth) %>%
@@ -162,35 +193,59 @@ df.tbl.train %>%
 ```
 
 #### Figure 4. Qualitative variables: Boxplots   
-```{r}
+Boxplots of qualitative variables (year, month, holiday and weather) are displayed.  
+
+```{r day-data-boxplot}
 boxplot1 <- df.train %>%
   ggplot(aes(x = factor(mnth), y = cnt)) +
-  geom_boxplot()
+  geom_boxplot() +
+  xlab("Month") +
+  ylab("Count of Total Rental Bikes")
 
 boxplot2 <- df.train %>%
   ggplot(aes(x = factor(weathersit), y = cnt)) +
-  geom_boxplot() 
+  geom_boxplot() +
+  xlab("Weather") +
+  ylab("Count of Total Rental Bikes") +
+  scale_x_discrete(limits = c("1", "2", "3"),
+                   labels = c("1" = "Good", "2" = "Moderate", "3" = "Bad"))
 
 boxplot3 <- df.train %>%
   ggplot(aes(x = factor(holiday), y = cnt)) +
-  geom_boxplot() 
+  geom_boxplot() +
+  xlab("Holiday") +
+  ylab("Count of Total Rental Bikes") +
+  scale_x_discrete(limits = c("0", "1"),
+                   labels = c("0" = "No", "1" = "Yes"))
 
 boxplot4 <- df.train %>%
   ggplot(aes(x = factor(yr), y = cnt)) +
-  geom_boxplot()
+  geom_boxplot() +
+  xlab("Year") +
+  ylab("Count of Total Rental Bikes") +
+  scale_x_discrete(limits = c("0", "1"),
+                   labels = c("0" = "2011", "1" = "2012")) 
 
 grid.arrange(boxplot4, boxplot1, boxplot3, boxplot2)
 ```
 
 #### Figure 5. Quantitative variables: Scatterplots    
-```{r}
+Scatterplot of quantitative variables (Humidity, Average Temperature, and Wind Speed) are displayed. 
+
+```{r dat-data-scatterplot, message = FALSE, warning = FALSE}
 df.train %>%
   gather(avgTemp, hum, windspeed, key = "var", value = "value") %>%
-  mutate(var = factor(var, levels = c("hum", "avgTemp", "windspeed"))) %>%
-  ggplot(aes(x = value, y = cnt, color = factor(yr))) +
+  mutate(var = factor(var, levels = c("hum", "avgTemp", "windspeed")),
+         Year = ifelse(yr == 0, "2011", "2012")) %>%
+  ggplot(aes(x = value, y = cnt, color = Year)) +
   geom_point() +
-  geom_smooth(aes(group = factor(yr))) +
-  facet_wrap(~var, scales = "free", nrow = 2) 
+  geom_smooth(aes(group = Year)) +
+  xlab("") +
+  ylab("Count of Total Rental Bikes") +
+  facet_wrap(~var, scales = "free", nrow = 2,
+             labeller = as_labeller(c(hum = "Humidity", 
+                                      avgTemp = "Average Temperature",
+                                      windspeed = "Wind Speed"))) 
 ```
 
 # Modeling  

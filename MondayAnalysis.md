@@ -62,10 +62,11 @@ according to the [correlation plot](correlation-plot-1.png). Variable
 month (mnth) was chosen over variable season to minimize the loss of
 information and also because month was more highly correlated with the
 response variable (cnt) than season. Variables temp and atemp were
-combined and their average was used in the models. Thus, the predictor
-variables used in the models are year (yr), month (mnth), holiday,
-weather (weathersit), average temperature (average of temp and atemp),
-humidity (hum), and wind speed (windspeed).
+combined and their average was used in the models. Variables day of the
+week (weekday) and working day were removed from the models due to their
+irrelevance. Thus, the predictor variables used in the models are year
+(yr), month (mnth), holiday, weather (weathersit), average temperature
+(average of temp and atemp), humidity (hum), and wind speed (windspeed).
 
 # Data
 
@@ -73,8 +74,8 @@ humidity (hum), and wind speed (windspeed).
 # Read in data
 url <- "https://archive.ics.uci.edu/ml/machine-learning-databases/00275/Bike-Sharing-Dataset.zip"
 download.file(url, "Bike-Sharing-Dataset.zip")
-
 unzip("Bike-Sharing-Dataset.zip", exdir = "./Data")
+
 df.bike <- read_csv("/Data/day.csv") %>%
   select(-instant, -casual, -registered) %>%
   mutate(dayofweek = dplyr::recode(weekday,
@@ -88,11 +89,13 @@ df.bike <- read_csv("/Data/day.csv") %>%
   #Combine variables temp and atemp 
   mutate(avgTemp = (temp+atemp)/2)
 
+# Filter by specific day of week
 df.bike.day <- df.bike %>%
   filter(weekday == 1)
 
 #Randomply sample from the data 
 #Form training and test sets
+set.seed(1109)
 train <- sample(1:nrow(df.bike.day), size = nrow(df.bike.day)*0.7)
 test <- dplyr::setdiff(1:nrow(df.bike.day), train)
 df.train <- df.bike.day[train, ]
@@ -103,18 +106,28 @@ df.test <- df.bike.day[test, ]
 
 ## Full Data
 
-Original data is used for full data exploratory analysis.
+In this section, summary statistics and plots about the original data
+are provided.
 
 #### Figure 1. Correlation plot
+
+Correlation between all pairs of variables are visualized. High
+correlations are observed between variables season and month and between
+temp and atemp.
 
 ``` r
 corrplot(cor(df.bike[,2:13]))
 ```
 
 ![Correlation
-Plot](MondayAnalysis_files/figure-gfm/correlation-plot-1.png)
+Plot](MondayAnalysis_files/figure-gfm/full-data-correlation-plot-1.png)
 
 #### Table 1. Qualitative variables: Contingency tables
+
+Counts of number of holidays and counts of each weather category are
+provided for each day of week. Factor levels of variable weathersit was
+re-labeled as Good (1), Moderate (2), Bad (3), and Extreme (4). In years
+2011 and 2012, no extreme weather was observed.
 
 ``` r
 df.tbl <- apply_labels(df.bike,
@@ -533,45 +546,78 @@ detach(df.tbl)
 
 #### Figure 2. Histograms of quantitative variables
 
+Histograms of the three quantitative variables (humidity, average
+temperature, and wind speed) are provided. All three variables appear
+approximately normal. Variables humidity and wind speed have outliers.
+
 ``` r
 df.bike %>%
   gather(avgTemp, hum, windspeed, key = "var", value = "value") %>%
   mutate(var = factor(var, levels = c("hum", "avgTemp", "windspeed"))) %>%
   ggplot(aes(x = value)) +
   geom_histogram(bins = 50) +
-  facet_wrap(~var, scales = "free", nrow = 2) 
+  xlab("") +
+  ylab("Frequency") +
+  facet_wrap(~var, scales = "free", nrow = 2,
+             labeller = as_labeller(c(hum = "Humidity", 
+                                      avgTemp = "Average Temperature",
+                                      windspeed = "Wind Speed"))) 
 ```
 
-![](MondayAnalysis_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
+![](MondayAnalysis_files/figure-gfm/full-data-histograms-1.png)<!-- -->
 
 #### Figure 3. Scatterplot of response variable(cnt) over days
 
+Counts of total rental bikes are plotted against days. Counts were
+generally higher in year 2012 than 2011, and counts were generally
+higher in warmer months (June - September) than in colder months.
+Whether a day was a holiday or not didn’t seem increase or decrease the
+count when compared to the counts of bike rentals made a few days before
+and after the holiday.
+
 ``` r
-ggplot(df.bike, aes(x = dteday, y = cnt)) +
-  geom_point(aes(colour = factor(holiday)))
+df.bike %>%
+  mutate(Holiday = ifelse(holiday == 0, "No", "Yes")) %>%
+  ggplot(aes(x = dteday, y = cnt)) +
+  geom_point(aes(colour = Holiday)) +
+  xlab("Date") +
+  ylab("Count of Total Rental Bikes")
 ```
 
-![](MondayAnalysis_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
+![](MondayAnalysis_files/figure-gfm/full-data-scatterplot-1.png)<!-- -->
 
 ## Specific Day of the Week Data
 
-Training data is used.
+In this section, summary statistics and plots about the training data
+used for modeling are provided. All statistics and plots are generated
+from data set consisting of a specific day of the week only: Monday.
 
 #### Table 2. Qualitative variables: Contingency tables
 
+Counts of variables year, holiday, and weather are displayed for each
+month.
+
 ``` r
 df.tbl.train <- apply_labels(df.train,
-                       holiday = "Holiday",
-                       holiday = c("No" = 0,
-                                   "Yes" = 1),
-                       weathersit = "Weather",
-                       weathersit = c("Good" = 1,
-                                      "Moderate" = 2,
-                                      "Bad" = 3,
-                                      "Extreme" = 4),
-                       dayofweek = "Day of Week")
+                             dteday = "Date",
+                             holiday = "Holiday",
+                             holiday = c("No" = 0,
+                                         "Yes" = 1),
+                             weathersit = "Weather",
+                             weathersit = c("Good" = 1,
+                                            "Moderate" = 2,
+                                            "Bad" = 3,
+                                            "Extreme" = 4),
+                             dayofweek = "Day of Week",
+                             yr = "Year",
+                             mnth = "Month",
+                             avgTemp = "Average Temperature",
+                             hum = "Humidity",
+                             windspeed = "Wind Speed",
+                             cnt = "Count of Total Rental Bikes")
+                       
 attach(df.tbl.train)
-cro_cases(weathersit, mnth,
+cro_cases(list(yr, holiday,weathersit), mnth,
           total_row_position = "none")
 ```
 
@@ -587,7 +633,7 @@ cro_cases(weathersit, mnth,
 
 <th colspan="12" style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;">
 
- mnth 
+ Month 
 
 </th>
 
@@ -681,6 +727,348 @@ cro_cases(weathersit, mnth,
 
 <td colspan="13" style="font-weight: 900;">
 
+ Year 
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align: left;">
+
+   0 
+
+</td>
+
+<td style="text-align: right;">
+
+4
+
+</td>
+
+<td style="text-align: right;">
+
+3
+
+</td>
+
+<td style="text-align: right;">
+
+4
+
+</td>
+
+<td style="text-align: right;">
+
+4
+
+</td>
+
+<td style="text-align: right;">
+
+4
+
+</td>
+
+<td style="text-align: right;">
+
+4
+
+</td>
+
+<td style="text-align: right;">
+
+3
+
+</td>
+
+<td style="text-align: right;">
+
+4
+
+</td>
+
+<td style="text-align: right;">
+
+3
+
+</td>
+
+<td style="text-align: right;">
+
+1
+
+</td>
+
+<td style="text-align: right;">
+
+2
+
+</td>
+
+<td style="text-align: right;">
+
+3
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align: left;">
+
+   1 
+
+</td>
+
+<td style="text-align: right;">
+
+3
+
+</td>
+
+<td style="text-align: right;">
+
+2
+
+</td>
+
+<td style="text-align: right;">
+
+4
+
+</td>
+
+<td style="text-align: right;">
+
+3
+
+</td>
+
+<td style="text-align: right;">
+
+3
+
+</td>
+
+<td style="text-align: right;">
+
+2
+
+</td>
+
+<td style="text-align: right;">
+
+3
+
+</td>
+
+<td style="text-align: right;">
+
+3
+
+</td>
+
+<td style="text-align: right;">
+
+2
+
+</td>
+
+<td style="text-align: right;">
+
+3
+
+</td>
+
+<td style="text-align: right;">
+
+3
+
+</td>
+
+<td style="text-align: right;">
+
+3
+
+</td>
+
+</tr>
+
+<tr>
+
+<td colspan="13" style="font-weight: 900;">
+
+ Holiday 
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align: left;">
+
+   No 
+
+</td>
+
+<td style="text-align: right;">
+
+4
+
+</td>
+
+<td style="text-align: right;">
+
+3
+
+</td>
+
+<td style="text-align: right;">
+
+8
+
+</td>
+
+<td style="text-align: right;">
+
+6
+
+</td>
+
+<td style="text-align: right;">
+
+6
+
+</td>
+
+<td style="text-align: right;">
+
+6
+
+</td>
+
+<td style="text-align: right;">
+
+5
+
+</td>
+
+<td style="text-align: right;">
+
+7
+
+</td>
+
+<td style="text-align: right;">
+
+3
+
+</td>
+
+<td style="text-align: right;">
+
+3
+
+</td>
+
+<td style="text-align: right;">
+
+4
+
+</td>
+
+<td style="text-align: right;">
+
+5
+
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align: left;">
+
+   Yes 
+
+</td>
+
+<td style="text-align: right;">
+
+3
+
+</td>
+
+<td style="text-align: right;">
+
+2
+
+</td>
+
+<td style="text-align: right;">
+
+</td>
+
+<td style="text-align: right;">
+
+1
+
+</td>
+
+<td style="text-align: right;">
+
+1
+
+</td>
+
+<td style="text-align: right;">
+
+</td>
+
+<td style="text-align: right;">
+
+1
+
+</td>
+
+<td style="text-align: right;">
+
+</td>
+
+<td style="text-align: right;">
+
+2
+
+</td>
+
+<td style="text-align: right;">
+
+1
+
+</td>
+
+<td style="text-align: right;">
+
+1
+
+</td>
+
+<td style="text-align: right;">
+
+1
+
+</td>
+
+</tr>
+
+<tr>
+
+<td colspan="13" style="font-weight: 900;">
+
  Weather 
 
 </td>
@@ -697,24 +1085,6 @@ cro_cases(weathersit, mnth,
 
 <td style="text-align: right;">
 
-2
-
-</td>
-
-<td style="text-align: right;">
-
-5
-
-</td>
-
-<td style="text-align: right;">
-
-6
-
-</td>
-
-<td style="text-align: right;">
-
 4
 
 </td>
@@ -727,25 +1097,37 @@ cro_cases(weathersit, mnth,
 
 <td style="text-align: right;">
 
-3
+7
 
 </td>
 
 <td style="text-align: right;">
 
-6
-
-</td>
-
-<td style="text-align: right;">
-
-6
+5
 
 </td>
 
 <td style="text-align: right;">
 
 3
+
+</td>
+
+<td style="text-align: right;">
+
+3
+
+</td>
+
+<td style="text-align: right;">
+
+5
+
+</td>
+
+<td style="text-align: right;">
+
+5
 
 </td>
 
@@ -757,13 +1139,17 @@ cro_cases(weathersit, mnth,
 
 <td style="text-align: right;">
 
-3
+</td>
+
+<td style="text-align: right;">
+
+4
 
 </td>
 
 <td style="text-align: right;">
 
-2
+3
 
 </td>
 
@@ -779,6 +1165,8 @@ cro_cases(weathersit, mnth,
 
 <td style="text-align: right;">
 
+3
+
 </td>
 
 <td style="text-align: right;">
@@ -807,37 +1195,35 @@ cro_cases(weathersit, mnth,
 
 <td style="text-align: right;">
 
-4
-
-</td>
-
-<td style="text-align: right;">
-
-2
-
-</td>
-
-<td style="text-align: right;">
-
-2
-
-</td>
-
-<td style="text-align: right;">
-
-4
-
-</td>
-
-<td style="text-align: right;">
-
-4
+3
 
 </td>
 
 <td style="text-align: right;">
 
 1
+
+</td>
+
+<td style="text-align: right;">
+
+2
+
+</td>
+
+<td style="text-align: right;">
+
+4
+
+</td>
+
+<td style="text-align: right;">
+
+4
+
+</td>
+
+<td style="text-align: right;">
 
 </td>
 
@@ -898,6 +1284,8 @@ cro_cases(weathersit, mnth,
 </td>
 
 <td style="text-align: right;">
+
+1
 
 </td>
 
@@ -975,6 +1363,9 @@ detach(df.tbl.train)
 
 #### Table 3. Quantitative variables: Summary statistics
 
+Minimum, median, mean, and max of the three qualitative variables
+(average temperature, humidity, and wind speed) are displayed.
+
 ``` r
 df.tbl.train %>%
   tab_cells(avgTemp, hum, windspeed) %>%
@@ -996,7 +1387,7 @@ df.tbl.train %>%
 
 <th colspan="12" style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;">
 
- mnth 
+ Month 
 
 </th>
 
@@ -1090,7 +1481,7 @@ df.tbl.train %>%
 
 <td colspan="13" style="font-weight: 900;">
 
- avgTemp 
+ Average Temperature 
 
 </td>
 
@@ -1106,13 +1497,13 @@ df.tbl.train %>%
 
 <td style="text-align: right;">
 
-0.2
+0.1
 
 </td>
 
 <td style="text-align: right;">
 
-0.2
+0.3
 
 </td>
 
@@ -1194,19 +1585,19 @@ df.tbl.train %>%
 
 <td style="text-align: right;">
 
-0.3
+0.4
 
 </td>
 
 <td style="text-align: right;">
 
-0.3
+0.4
 
 </td>
 
 <td style="text-align: right;">
 
-0.5
+0.6
 
 </td>
 
@@ -1254,7 +1645,7 @@ df.tbl.train %>%
 
 <td style="text-align: right;">
 
-0.4
+0.3
 
 </td>
 
@@ -1336,7 +1727,7 @@ df.tbl.train %>%
 
 <td style="text-align: right;">
 
-0.4
+0.3
 
 </td>
 
@@ -1352,7 +1743,7 @@ df.tbl.train %>%
 
 <td style="text-align: right;">
 
-0.2
+0.3
 
 </td>
 
@@ -1418,7 +1809,7 @@ df.tbl.train %>%
 
 <td style="text-align: right;">
 
-0.5
+0.4
 
 </td>
 
@@ -1428,7 +1819,7 @@ df.tbl.train %>%
 
 <td colspan="13" style="font-weight: 900;">
 
- hum 
+ Humidity 
 
 </td>
 
@@ -1444,7 +1835,7 @@ df.tbl.train %>%
 
 <td style="text-align: right;">
 
-0.5
+0.4
 
 </td>
 
@@ -1462,7 +1853,7 @@ df.tbl.train %>%
 
 <td style="text-align: right;">
 
-0.3
+0.4
 
 </td>
 
@@ -1492,7 +1883,7 @@ df.tbl.train %>%
 
 <td style="text-align: right;">
 
-0.5
+0.7
 
 </td>
 
@@ -1510,7 +1901,7 @@ df.tbl.train %>%
 
 <td style="text-align: right;">
 
-0.6
+0.5
 
 </td>
 
@@ -1562,18 +1953,6 @@ df.tbl.train %>%
 
 <td style="text-align: right;">
 
-0.6
-
-</td>
-
-<td style="text-align: right;">
-
-0.6
-
-</td>
-
-<td style="text-align: right;">
-
 0.7
 
 </td>
@@ -1581,18 +1960,30 @@ df.tbl.train %>%
 <td style="text-align: right;">
 
 0.7
-
-</td>
-
-<td style="text-align: right;">
-
-0.6
 
 </td>
 
 <td style="text-align: right;">
 
 0.8
+
+</td>
+
+<td style="text-align: right;">
+
+0.7
+
+</td>
+
+<td style="text-align: right;">
+
+0.6
+
+</td>
+
+<td style="text-align: right;">
+
+0.7
 
 </td>
 
@@ -1656,25 +2047,25 @@ df.tbl.train %>%
 
 <td style="text-align: right;">
 
-0.7
-
-</td>
-
-<td style="text-align: right;">
-
-0.7
-
-</td>
-
-<td style="text-align: right;">
-
-0.6
-
-</td>
-
-<td style="text-align: right;">
-
 0.8
+
+</td>
+
+<td style="text-align: right;">
+
+0.7
+
+</td>
+
+<td style="text-align: right;">
+
+0.7
+
+</td>
+
+<td style="text-align: right;">
+
+0.7
 
 </td>
 
@@ -1690,7 +2081,7 @@ df.tbl.train %>%
 
 <td style="text-align: right;">
 
-0.5
+0.7
 
 </td>
 
@@ -1750,7 +2141,7 @@ df.tbl.train %>%
 
 <td style="text-align: right;">
 
-0.7
+0.9
 
 </td>
 
@@ -1766,7 +2157,7 @@ df.tbl.train %>%
 
 <td colspan="13" style="font-weight: 900;">
 
- windspeed 
+ Wind Speed 
 
 </td>
 
@@ -1782,13 +2173,13 @@ df.tbl.train %>%
 
 <td style="text-align: right;">
 
-0.2
+0.1
 
 </td>
 
 <td style="text-align: right;">
 
-0.0
+0.2
 
 </td>
 
@@ -1882,7 +2273,7 @@ df.tbl.train %>%
 
 <td style="text-align: right;">
 
-0.2
+0.3
 
 </td>
 
@@ -1900,7 +2291,7 @@ df.tbl.train %>%
 
 <td style="text-align: right;">
 
-0.2
+0.1
 
 </td>
 
@@ -1918,7 +2309,7 @@ df.tbl.train %>%
 
 <td style="text-align: right;">
 
-0.2
+0.1
 
 </td>
 
@@ -1952,7 +2343,7 @@ df.tbl.train %>%
 
 <td style="text-align: right;">
 
-0.2
+0.3
 
 </td>
 
@@ -2028,18 +2419,6 @@ df.tbl.train %>%
 
 <td style="border-bottom: 2px solid grey; text-align: right;">
 
-0.2
-
-</td>
-
-<td style="border-bottom: 2px solid grey; text-align: right;">
-
-0.4
-
-</td>
-
-<td style="border-bottom: 2px solid grey; text-align: right;">
-
 0.3
 
 </td>
@@ -2052,6 +2431,18 @@ df.tbl.train %>%
 
 <td style="border-bottom: 2px solid grey; text-align: right;">
 
+0.4
+
+</td>
+
+<td style="border-bottom: 2px solid grey; text-align: right;">
+
+0.4
+
+</td>
+
+<td style="border-bottom: 2px solid grey; text-align: right;">
+
 0.2
 
 </td>
@@ -2076,7 +2467,7 @@ df.tbl.train %>%
 
 <td style="border-bottom: 2px solid grey; text-align: right;">
 
-0.3
+0.2
 
 </td>
 
@@ -2106,43 +2497,67 @@ df.tbl.train %>%
 
 #### Figure 4. Qualitative variables: Boxplots
 
+Boxplots of qualitative variables (year, month, holiday and weather) are
+displayed.
+
 ``` r
 boxplot1 <- df.train %>%
   ggplot(aes(x = factor(mnth), y = cnt)) +
-  geom_boxplot()
+  geom_boxplot() +
+  xlab("Month") +
+  ylab("Count of Total Rental Bikes")
 
 boxplot2 <- df.train %>%
   ggplot(aes(x = factor(weathersit), y = cnt)) +
-  geom_boxplot() 
+  geom_boxplot() +
+  xlab("Weather") +
+  ylab("Count of Total Rental Bikes") +
+  scale_x_discrete(limits = c("1", "2", "3"),
+                   labels = c("1" = "Good", "2" = "Moderate", "3" = "Bad"))
 
 boxplot3 <- df.train %>%
   ggplot(aes(x = factor(holiday), y = cnt)) +
-  geom_boxplot() 
+  geom_boxplot() +
+  xlab("Holiday") +
+  ylab("Count of Total Rental Bikes") +
+  scale_x_discrete(limits = c("0", "1"),
+                   labels = c("0" = "No", "1" = "Yes"))
 
 boxplot4 <- df.train %>%
   ggplot(aes(x = factor(yr), y = cnt)) +
-  geom_boxplot()
+  geom_boxplot() +
+  xlab("Year") +
+  ylab("Count of Total Rental Bikes") +
+  scale_x_discrete(limits = c("0", "1"),
+                   labels = c("0" = "2011", "1" = "2012")) 
 
 grid.arrange(boxplot4, boxplot1, boxplot3, boxplot2)
 ```
 
-![](MondayAnalysis_files/figure-gfm/unnamed-chunk-7-1.png)<!-- -->
+![](MondayAnalysis_files/figure-gfm/day-data-boxplot-1.png)<!-- -->
 
 #### Figure 5. Quantitative variables: Scatterplots
+
+Scatterplot of quantitative variables (Humidity, Average Temperature,
+and Wind Speed) are displayed.
 
 ``` r
 df.train %>%
   gather(avgTemp, hum, windspeed, key = "var", value = "value") %>%
-  mutate(var = factor(var, levels = c("hum", "avgTemp", "windspeed"))) %>%
-  ggplot(aes(x = value, y = cnt, color = factor(yr))) +
+  mutate(var = factor(var, levels = c("hum", "avgTemp", "windspeed")),
+         Year = ifelse(yr == 0, "2011", "2012")) %>%
+  ggplot(aes(x = value, y = cnt, color = Year)) +
   geom_point() +
-  geom_smooth(aes(group = factor(yr))) +
-  facet_wrap(~var, scales = "free", nrow = 2) 
+  geom_smooth(aes(group = Year)) +
+  xlab("") +
+  ylab("Count of Total Rental Bikes") +
+  facet_wrap(~var, scales = "free", nrow = 2,
+             labeller = as_labeller(c(hum = "Humidity", 
+                                      avgTemp = "Average Temperature",
+                                      windspeed = "Wind Speed"))) 
 ```
 
-    ## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
-
-![](MondayAnalysis_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
+![](MondayAnalysis_files/figure-gfm/dat-data-scatterplot-1.png)<!-- -->
 
 # Modeling
 
@@ -2156,10 +2571,10 @@ treeFit <- train(cnt ~ yr + mnth + holiday + weathersit + avgTemp + hum + windsp
 treeFit$results
 ```
 
-    ##           cp     RMSE   Rsquared       MAE
-    ## 1 0.08315861 1249.265 0.43871382  871.9373
-    ## 2 0.22085594 1480.598 0.23167038 1264.2147
-    ## 3 0.41611962 1836.741 0.02313598 1644.0745
+    ##           cp     RMSE    Rsquared      MAE
+    ## 1 0.07039248 1280.707 0.471340268 1002.023
+    ## 2 0.17230882 1406.555 0.359472345 1243.783
+    ## 3 0.45969184 1959.403 0.007081118 1770.250
 
 ``` r
 treePred <- predict(treeFit, newdata = df.test)
@@ -2178,25 +2593,25 @@ boostFit$results
 ```
 
     ##   shrinkage interaction.depth n.minobsinnode n.trees     RMSE  Rsquared
-    ## 1       0.1                 1             10      50 761.2691 0.8151414
-    ## 4       0.1                 2             10      50 761.1121 0.7996192
-    ## 7       0.1                 3             10      50 759.1499 0.8009363
-    ## 2       0.1                 1             10     100 738.6397 0.8171317
-    ## 5       0.1                 2             10     100 754.8024 0.8086861
-    ## 8       0.1                 3             10     100 772.8222 0.7991420
-    ## 3       0.1                 1             10     150 744.0603 0.8168485
-    ## 6       0.1                 2             10     150 750.0005 0.8108396
-    ## 9       0.1                 3             10     150 763.2784 0.8018604
+    ## 1       0.1                 1             10      50 822.8230 0.7828556
+    ## 4       0.1                 2             10      50 753.8376 0.8074854
+    ## 7       0.1                 3             10      50 775.0523 0.7986783
+    ## 2       0.1                 1             10     100 771.6989 0.8038712
+    ## 5       0.1                 2             10     100 742.0641 0.8167548
+    ## 8       0.1                 3             10     100 741.5423 0.8181931
+    ## 3       0.1                 1             10     150 751.0869 0.8093963
+    ## 6       0.1                 2             10     150 757.9466 0.8151539
+    ## 9       0.1                 3             10     150 748.8548 0.8189707
     ##        MAE   RMSESD RsquaredSD    MAESD
-    ## 1 571.3036 297.5567  0.1107194 158.7968
-    ## 4 563.0749 338.4192  0.1338603 167.3590
-    ## 7 556.2662 347.0529  0.1392153 187.9989
-    ## 2 542.3820 298.6180  0.1176837 146.3355
-    ## 5 547.9519 306.3109  0.1173246 120.2693
-    ## 8 571.4847 311.9770  0.1208261 148.7789
-    ## 3 546.0298 288.4683  0.1130381 144.0938
-    ## 6 547.4595 302.4847  0.1119084 134.2266
-    ## 9 564.9278 323.0779  0.1339322 168.0201
+    ## 1 679.3042 288.8085  0.1760329 189.3959
+    ## 4 591.9704 309.5414  0.1600545 193.5577
+    ## 7 632.5262 280.1477  0.1544765 169.4023
+    ## 2 617.4081 274.7145  0.1482330 172.1245
+    ## 5 586.0333 273.3767  0.1298599 161.2001
+    ## 8 587.1008 246.1741  0.1247739 139.4208
+    ## 3 609.0091 275.9815  0.1403147 180.5428
+    ## 6 592.2217 258.7182  0.1242272 148.0944
+    ## 9 588.1773 249.4318  0.1269766 142.1458
 
 ``` r
 boostPred <- predict(boostFit, newdata = df.test)
@@ -2214,7 +2629,7 @@ kable(tbl.rmse, caption = "Comparison of Models' RMSE")
 
 |            |     RMSE |
 | ---------- | -------: |
-| Reg. Tree  | 1521.097 |
-| Boost Tree | 1251.520 |
+| Reg. Tree  | 1423.966 |
+| Boost Tree | 1029.307 |
 
 Comparison of Models’ RMSE
