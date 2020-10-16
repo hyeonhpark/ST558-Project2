@@ -12,6 +12,7 @@ library(tidyverse)
 library(ggplot2)
 library(GGally)
 library(corrplot)
+library(expss)
 ```
 
 # Introduction  
@@ -20,7 +21,6 @@ You should have an introduction section that briefly describes the data and the 
 
 You should also mention the purpose of your analysis and the methods you’ll use (no need to detail them here) for analysis.
 
-See Figure \ref{fig:correlation-plot}.
 
 # Data  
 ```{r, message = FALSE, warning = FALSE}
@@ -31,15 +31,16 @@ download.file(url, "Bike-Sharing-Dataset.zip")
 unzip("Bike-Sharing-Dataset.zip", exdir = "./Data")
 df.bike <- read_csv("/Data/day.csv") %>%
   select(-instant, -casual, -registered) %>%
-  mutate(dayofweek = recode(weekday,
+  mutate(dayofweek = dplyr::recode(weekday,
                             `0` = "Sunday",
                             `1` = "Monday",
                             `2` = "Tuesday",
                             `3` = "Wednesday",
                             `4` = "Thursday",
                             `5` = "Friday",
-                            `6` = "Saturday"))
-  #Combine variables temp and atemp
+                            `6` = "Saturday")) %>%
+  #Combine variables temp and atemp 
+  mutate(avgTemp = (temp+atemp)/2)
 
 df.bike.day <- df.bike %>%
   filter(weekday == 1)
@@ -55,50 +56,127 @@ df.test <- df.bike.day[test, ]
 # Summarizations  
 ## Full Data  
 
-### Correlation Plot  
+Original data is used for full data exploratory analysis.  
+
+#### Figure 1. Correlation plot  
 ```{r correlation-plot, fig.cap = "Correlation Plot"}
 corrplot(cor(df.bike[,2:13]))
 ```
 
+#### Table 1. Qualitative variables: Contingency tables  
 ```{r}
+df.tbl <- apply_labels(df.bike,
+                       holiday = "Holiday",
+                       holiday = c("No" = 0,
+                                   "Yes" = 1),
+                       weathersit = "Weather",
+                       weathersit = c("Good" = 1,
+                                      "Moderate" = 2,
+                                      "Bad" = 3,
+                                      "Extreme" = 4),
+                       dayofweek = "Day of Week")
+attach(df.tbl)
+cro_cases(list(holiday, weathersit), dayofweek,
+          total_row_position = "none")
+detach(df.tbl)
+```
 
-#Qualitative variables: Contingency tables
-
-
-#Quantitative variables: Summary statistics
-
-
-
-
-#Histograms of quantitative variables
+#### Figure 2. Histograms of quantitative variables    
+```{r}
 df.bike %>%
-  gather(temp, atemp, hum, windspeed, key = "var", value = "value") %>%
+  gather(avgTemp, hum, windspeed, key = "var", value = "value") %>%
+  mutate(var = factor(var, levels = c("hum", "avgTemp", "windspeed"))) %>%
   ggplot(aes(x = value)) +
-  geom_histogram() +
-  facet_wrap(~var, scales = "free") 
+  geom_histogram(bins = 50) +
+  facet_wrap(~var, scales = "free", nrow = 2) 
+```
 
-#Scatterplot of response variable(cnt) over days
+#### Figure 3. Scatterplot of response variable(cnt) over days    
+```{r}
 ggplot(df.bike, aes(x = dteday, y = cnt)) +
   geom_point(aes(colour = factor(holiday)))
-
 ```
 
 ## Specific Day of the Week Data  
-```{r}
 
+Training data is used.  
+
+#### Table 2. Qualitative variables: Contingency tables  
+```{r}
+df.tbl.train <- apply_labels(df.train,
+                       holiday = "Holiday",
+                       holiday = c("No" = 0,
+                                   "Yes" = 1),
+                       weathersit = "Weather",
+                       weathersit = c("Good" = 1,
+                                      "Moderate" = 2,
+                                      "Bad" = 3,
+                                      "Extreme" = 4),
+                       dayofweek = "Day of Week")
+attach(df.tbl.train)
+cro_cases(list(holiday, weathersit), dayofweek,
+          total_row_position = "none")
+detach(df.tbl.train)
+
+```
+
+#### Table 3. Quantitative variables: Summary statistics  
+```{r}
+df.tbl.train %>%
+  tab_cells(avgTemp, hum, windspeed) %>%
+  tab_cols(mnth) %>%
+  tab_stat_fun(Minimum = w_min, Median = w_median, 
+               Mean = w_mean, Max = w_max) %>%
+  tab_pivot()
+```
+
+```{r}
 df.train %>%
-  gather(temp, atemp, hum, windspeed, key = "var", value = "value") %>%
+  gather(avgTemp, hum, windspeed, key = "var", value = "value") %>%
+  mutate(var = factor(var, levels = c("hum", "avgTemp", "windspeed"))) %>%
   ggplot(aes(x = value)) +
   geom_histogram() +
-  facet_wrap(~var, scales = "free") 
+  facet_wrap(~var, scales = "free", nrow = 2) 
 
 
 
 df.train %>%
-  gather(temp, atemp, hum, windspeed, key = "var", value = "value") %>%
+  gather(avgTemp, hum, windspeed, key = "var", value = "value") %>%
+  mutate(var = factor(var, levels = c("hum", "avgTemp", "windspeed"))) %>%
   ggplot(aes(x = value, y = cnt, color = factor(yr), shape = factor(season))) +
   geom_point() +
   geom_smooth(aes(group = factor(yr))) +
-  facet_wrap(~var, scales = "free") 
+  facet_wrap(~var, scales = "free", nrow = 2) 
 ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
