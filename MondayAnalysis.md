@@ -511,7 +511,7 @@ df.tbl.train <- apply_labels(df.train,
                                       "Extreme" = 4),
                        dayofweek = "Day of Week")
 attach(df.tbl.train)
-cro_cases(list(holiday, weathersit), dayofweek,
+cro_cases(weathersit, mnth,
           total_row_position = "none")
 ```
 
@@ -525,9 +525,9 @@ cro_cases(list(holiday, weathersit), dayofweek,
 
 </th>
 
-<th colspan="1" style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;">
+<th colspan="12" style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;">
 
- Day of Week 
+ mnth 
 
 </th>
 
@@ -541,7 +541,73 @@ cro_cases(list(holiday, weathersit), dayofweek,
 
 <th style="font-weight: 900; border-bottom: 1px solid grey; text-align: center;">
 
- Monday 
+ 1 
+
+</th>
+
+<th style="font-weight: 900; border-bottom: 1px solid grey; text-align: center;">
+
+ 2 
+
+</th>
+
+<th style="font-weight: 900; border-bottom: 1px solid grey; text-align: center;">
+
+ 3 
+
+</th>
+
+<th style="font-weight: 900; border-bottom: 1px solid grey; text-align: center;">
+
+ 4 
+
+</th>
+
+<th style="font-weight: 900; border-bottom: 1px solid grey; text-align: center;">
+
+ 5 
+
+</th>
+
+<th style="font-weight: 900; border-bottom: 1px solid grey; text-align: center;">
+
+ 6 
+
+</th>
+
+<th style="font-weight: 900; border-bottom: 1px solid grey; text-align: center;">
+
+ 7 
+
+</th>
+
+<th style="font-weight: 900; border-bottom: 1px solid grey; text-align: center;">
+
+ 8 
+
+</th>
+
+<th style="font-weight: 900; border-bottom: 1px solid grey; text-align: center;">
+
+ 9 
+
+</th>
+
+<th style="font-weight: 900; border-bottom: 1px solid grey; text-align: center;">
+
+ 10 
+
+</th>
+
+<th style="font-weight: 900; border-bottom: 1px solid grey; text-align: center;">
+
+ 11 
+
+</th>
+
+<th style="font-weight: 900; border-bottom: 1px solid grey; text-align: center;">
+
+ 12 
 
 </th>
 
@@ -553,49 +619,7 @@ cro_cases(list(holiday, weathersit), dayofweek,
 
 <tr>
 
-<td colspan="2" style="font-weight: 900;">
-
- Holiday 
-
-</td>
-
-</tr>
-
-<tr>
-
-<td style="text-align: left;">
-
-   No 
-
-</td>
-
-<td style="text-align: right;">
-
-62
-
-</td>
-
-</tr>
-
-<tr>
-
-<td style="text-align: left;">
-
-   Yes 
-
-</td>
-
-<td style="text-align: right;">
-
-11
-
-</td>
-
-</tr>
-
-<tr>
-
-<td colspan="2" style="font-weight: 900;">
+<td colspan="13" style="font-weight: 900;">
 
  Weather 
 
@@ -613,7 +637,73 @@ cro_cases(list(holiday, weathersit), dayofweek,
 
 <td style="text-align: right;">
 
-42
+4
+
+</td>
+
+<td style="text-align: right;">
+
+6
+
+</td>
+
+<td style="text-align: right;">
+
+4
+
+</td>
+
+<td style="text-align: right;">
+
+6
+
+</td>
+
+<td style="text-align: right;">
+
+3
+
+</td>
+
+<td style="text-align: right;">
+
+1
+
+</td>
+
+<td style="text-align: right;">
+
+6
+
+</td>
+
+<td style="text-align: right;">
+
+7
+
+</td>
+
+<td style="text-align: right;">
+
+2
+
+</td>
+
+<td style="text-align: right;">
+
+4
+
+</td>
+
+<td style="text-align: right;">
+
+2
+
+</td>
+
+<td style="text-align: right;">
+
+1
 
 </td>
 
@@ -629,7 +719,73 @@ cro_cases(list(holiday, weathersit), dayofweek,
 
 <td style="text-align: right;">
 
-29
+2
+
+</td>
+
+<td style="text-align: right;">
+
+1
+
+</td>
+
+<td style="text-align: right;">
+
+1
+
+</td>
+
+<td style="text-align: right;">
+
+3
+
+</td>
+
+<td style="text-align: right;">
+
+3
+
+</td>
+
+<td style="text-align: right;">
+
+2
+
+</td>
+
+<td style="text-align: right;">
+
+2
+
+</td>
+
+<td style="text-align: right;">
+
+2
+
+</td>
+
+<td style="text-align: right;">
+
+3
+
+</td>
+
+<td style="text-align: right;">
+
+3
+
+</td>
+
+<td style="text-align: right;">
+
+1
+
+</td>
+
+<td style="text-align: right;">
+
+3
 
 </td>
 
@@ -645,7 +801,51 @@ cro_cases(list(holiday, weathersit), dayofweek,
 
 <td style="text-align: right;">
 
-2
+</td>
+
+<td style="text-align: right;">
+
+</td>
+
+<td style="text-align: right;">
+
+</td>
+
+<td style="text-align: right;">
+
+</td>
+
+<td style="text-align: right;">
+
+</td>
+
+<td style="text-align: right;">
+
+</td>
+
+<td style="text-align: right;">
+
+</td>
+
+<td style="text-align: right;">
+
+</td>
+
+<td style="text-align: right;">
+
+</td>
+
+<td style="text-align: right;">
+
+</td>
+
+<td style="text-align: right;">
+
+1
+
+</td>
+
+<td style="text-align: right;">
 
 </td>
 
@@ -656,6 +856,50 @@ cro_cases(list(holiday, weathersit), dayofweek,
 <td style="border-bottom: 2px solid grey; text-align: left;">
 
    Extreme 
+
+</td>
+
+<td style="border-bottom: 2px solid grey; text-align: right;">
+
+</td>
+
+<td style="border-bottom: 2px solid grey; text-align: right;">
+
+</td>
+
+<td style="border-bottom: 2px solid grey; text-align: right;">
+
+</td>
+
+<td style="border-bottom: 2px solid grey; text-align: right;">
+
+</td>
+
+<td style="border-bottom: 2px solid grey; text-align: right;">
+
+</td>
+
+<td style="border-bottom: 2px solid grey; text-align: right;">
+
+</td>
+
+<td style="border-bottom: 2px solid grey; text-align: right;">
+
+</td>
+
+<td style="border-bottom: 2px solid grey; text-align: right;">
+
+</td>
+
+<td style="border-bottom: 2px solid grey; text-align: right;">
+
+</td>
+
+<td style="border-bottom: 2px solid grey; text-align: right;">
+
+</td>
+
+<td style="border-bottom: 2px solid grey; text-align: right;">
 
 </td>
 
@@ -806,13 +1050,13 @@ df.tbl.train %>%
 
 <td style="text-align: right;">
 
-0.1
+0.2
 
 </td>
 
 <td style="text-align: right;">
 
-0.3
+0.2
 
 </td>
 
@@ -906,7 +1150,7 @@ df.tbl.train %>%
 
 <td style="text-align: right;">
 
-0.6
+0.5
 
 </td>
 
@@ -954,7 +1198,7 @@ df.tbl.train %>%
 
 <td style="text-align: right;">
 
-0.3
+0.4
 
 </td>
 
@@ -1052,7 +1296,7 @@ df.tbl.train %>%
 
 <td style="text-align: right;">
 
-0.2
+0.3
 
 </td>
 
@@ -1076,12 +1320,6 @@ df.tbl.train %>%
 
 <td style="text-align: right;">
 
-0.6
-
-</td>
-
-<td style="text-align: right;">
-
 0.7
 
 </td>
@@ -1100,7 +1338,13 @@ df.tbl.train %>%
 
 <td style="text-align: right;">
 
-0.6
+0.7
+
+</td>
+
+<td style="text-align: right;">
+
+0.7
 
 </td>
 
@@ -1118,7 +1362,7 @@ df.tbl.train %>%
 
 <td style="text-align: right;">
 
-0.5
+0.4
 
 </td>
 
@@ -1150,13 +1394,13 @@ df.tbl.train %>%
 
 <td style="text-align: right;">
 
-0.5
+0.4
 
 </td>
 
 <td style="text-align: right;">
 
-0.5
+0.3
 
 </td>
 
@@ -1232,13 +1476,55 @@ df.tbl.train %>%
 
 <td style="text-align: right;">
 
-0.6
+0.5
 
 </td>
 
 <td style="text-align: right;">
 
 0.5
+
+</td>
+
+<td style="text-align: right;">
+
+0.6
+
+</td>
+
+<td style="text-align: right;">
+
+0.7
+
+</td>
+
+<td style="text-align: right;">
+
+0.6
+
+</td>
+
+<td style="text-align: right;">
+
+0.7
+
+</td>
+
+<td style="text-align: right;">
+
+0.6
+
+</td>
+
+<td style="text-align: right;">
+
+0.7
+
+</td>
+
+<td style="text-align: right;">
+
+0.7
 
 </td>
 
@@ -1251,48 +1537,6 @@ df.tbl.train %>%
 <td style="text-align: right;">
 
 0.8
-
-</td>
-
-<td style="text-align: right;">
-
-0.6
-
-</td>
-
-<td style="text-align: right;">
-
-0.7
-
-</td>
-
-<td style="text-align: right;">
-
-0.7
-
-</td>
-
-<td style="text-align: right;">
-
-0.7
-
-</td>
-
-<td style="text-align: right;">
-
-0.7
-
-</td>
-
-<td style="text-align: right;">
-
-0.7
-
-</td>
-
-<td style="text-align: right;">
-
-0.7
 
 </td>
 
@@ -1314,7 +1558,7 @@ df.tbl.train %>%
 
 <td style="text-align: right;">
 
-0.7
+0.5
 
 </td>
 
@@ -1374,7 +1618,7 @@ df.tbl.train %>%
 
 <td style="text-align: right;">
 
-0.7
+0.8
 
 </td>
 
@@ -1396,7 +1640,7 @@ df.tbl.train %>%
 
 <td style="text-align: right;">
 
-0.9
+0.7
 
 </td>
 
@@ -1420,7 +1664,7 @@ df.tbl.train %>%
 
 <td style="text-align: right;">
 
-0.8
+0.7
 
 </td>
 
@@ -1444,7 +1688,7 @@ df.tbl.train %>%
 
 <td style="text-align: right;">
 
-0.9
+0.7
 
 </td>
 
@@ -1488,6 +1732,18 @@ df.tbl.train %>%
 
 <td style="text-align: right;">
 
+0.0
+
+</td>
+
+<td style="text-align: right;">
+
+0.2
+
+</td>
+
+<td style="text-align: right;">
+
 0.2
 
 </td>
@@ -1501,18 +1757,6 @@ df.tbl.train %>%
 <td style="text-align: right;">
 
 0.2
-
-</td>
-
-<td style="text-align: right;">
-
-0.1
-
-</td>
-
-<td style="text-align: right;">
-
-0.1
 
 </td>
 
@@ -1570,6 +1814,18 @@ df.tbl.train %>%
 
 <td style="text-align: right;">
 
+0.2
+
+</td>
+
+<td style="text-align: right;">
+
+0.2
+
+</td>
+
+<td style="text-align: right;">
+
 0.3
 
 </td>
@@ -1582,12 +1838,6 @@ df.tbl.train %>%
 
 <td style="text-align: right;">
 
-0.3
-
-</td>
-
-<td style="text-align: right;">
-
 0.2
 
 </td>
@@ -1601,12 +1851,6 @@ df.tbl.train %>%
 <td style="text-align: right;">
 
 0.2
-
-</td>
-
-<td style="text-align: right;">
-
-0.1
 
 </td>
 
@@ -1624,7 +1868,7 @@ df.tbl.train %>%
 
 <td style="text-align: right;">
 
-0.1
+0.2
 
 </td>
 
@@ -1652,7 +1896,7 @@ df.tbl.train %>%
 
 <td style="text-align: right;">
 
-0.3
+0.2
 
 </td>
 
@@ -1665,12 +1909,6 @@ df.tbl.train %>%
 <td style="text-align: right;">
 
 0.3
-
-</td>
-
-<td style="text-align: right;">
-
-0.2
 
 </td>
 
@@ -1706,13 +1944,19 @@ df.tbl.train %>%
 
 <td style="text-align: right;">
 
-0.2
+0.1
 
 </td>
 
 <td style="text-align: right;">
 
 0.1
+
+</td>
+
+<td style="text-align: right;">
+
+0.2
 
 </td>
 
@@ -1728,13 +1972,13 @@ df.tbl.train %>%
 
 <td style="border-bottom: 2px solid grey; text-align: right;">
 
-0.2
+0.3
 
 </td>
 
 <td style="border-bottom: 2px solid grey; text-align: right;">
 
-0.3
+0.4
 
 </td>
 
@@ -1764,7 +2008,7 @@ df.tbl.train %>%
 
 <td style="border-bottom: 2px solid grey; text-align: right;">
 
-0.3
+0.2
 
 </td>
 
@@ -1776,19 +2020,19 @@ df.tbl.train %>%
 
 <td style="border-bottom: 2px solid grey; text-align: right;">
 
-0.3
-
-</td>
-
-<td style="border-bottom: 2px solid grey; text-align: right;">
-
-0.4
+0.2
 
 </td>
 
 <td style="border-bottom: 2px solid grey; text-align: right;">
 
 0.3
+
+</td>
+
+<td style="border-bottom: 2px solid grey; text-align: right;">
+
+0.2
 
 </td>
 
@@ -1804,24 +2048,37 @@ df.tbl.train %>%
 
 </table>
 
-``` r
-df.train %>%
-  gather(avgTemp, hum, windspeed, key = "var", value = "value") %>%
-  mutate(var = factor(var, levels = c("hum", "avgTemp", "windspeed"))) %>%
-  ggplot(aes(x = value)) +
-  geom_histogram() +
-  facet_wrap(~var, scales = "free", nrow = 2) 
-```
+#### Figure 4. Qualitative variables: Boxplots
 
-    ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+``` r
+boxplot1 <- df.train %>%
+  ggplot(aes(x = factor(mnth), y = cnt)) +
+  geom_boxplot()
+
+boxplot2 <- df.train %>%
+  ggplot(aes(x = factor(weathersit), y = cnt)) +
+  geom_boxplot() 
+
+boxplot3 <- df.train %>%
+  ggplot(aes(x = factor(holiday), y = cnt)) +
+  geom_boxplot() 
+
+boxplot4 <- df.train %>%
+  ggplot(aes(x = factor(yr), y = cnt)) +
+  geom_boxplot()
+
+grid.arrange(boxplot4, boxplot1, boxplot3, boxplot2)
+```
 
 ![](MondayAnalysis_files/figure-gfm/unnamed-chunk-7-1.png)<!-- -->
 
+#### Figure 5. Quantitative variables: Scatterplots
+
 ``` r
 df.train %>%
   gather(avgTemp, hum, windspeed, key = "var", value = "value") %>%
   mutate(var = factor(var, levels = c("hum", "avgTemp", "windspeed"))) %>%
-  ggplot(aes(x = value, y = cnt, color = factor(yr), shape = factor(season))) +
+  ggplot(aes(x = value, y = cnt, color = factor(yr))) +
   geom_point() +
   geom_smooth(aes(group = factor(yr))) +
   facet_wrap(~var, scales = "free", nrow = 2) 
@@ -1829,4 +2086,79 @@ df.train %>%
 
     ## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
 
-![](MondayAnalysis_files/figure-gfm/unnamed-chunk-7-2.png)<!-- -->
+![](MondayAnalysis_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
+
+# Modeling
+
+## Tree-based Model
+
+``` r
+treeFit <- train(cnt ~ yr + mnth + holiday + weathersit + avgTemp + hum + windspeed, data = df.train,
+                  method = "rpart",
+                  trControl = trainControl(method = "LOOCV")
+                  )
+treeFit$results
+```
+
+    ##          cp     RMSE     Rsquared       MAE
+    ## 1 0.0494698 1015.236 0.6644087756  820.3415
+    ## 2 0.2883853 1467.754 0.3225465226 1298.4655
+    ## 3 0.4604987 1886.827 0.0001999059 1707.5987
+
+``` r
+treePred <- predict(treeFit, newdata = df.test)
+treeRMSE <- sqrt(mean((treePred-df.test$cnt)^2))
+```
+
+## Boosted Tree Model
+
+``` r
+boostFit <- train(cnt ~ yr + mnth + holiday + weathersit + avgTemp + hum + windspeed, data = df.train,
+                  method = "gbm",
+                  trControl = trainControl(method = "cv", number = 10),
+                  preProcess = c("center", "scale"),
+                  verbose = FALSE)
+boostFit$results
+```
+
+    ##   shrinkage interaction.depth n.minobsinnode n.trees     RMSE  Rsquared
+    ## 1       0.1                 1             10      50 757.7032 0.8365994
+    ## 4       0.1                 2             10      50 718.0798 0.8442327
+    ## 7       0.1                 3             10      50 706.4724 0.8435031
+    ## 2       0.1                 1             10     100 732.6253 0.8482311
+    ## 5       0.1                 2             10     100 709.5150 0.8515073
+    ## 8       0.1                 3             10     100 698.6894 0.8454125
+    ## 3       0.1                 1             10     150 728.0524 0.8538903
+    ## 6       0.1                 2             10     150 725.8167 0.8475254
+    ## 9       0.1                 3             10     150 711.8457 0.8421098
+    ##        MAE   RMSESD RsquaredSD     MAESD
+    ## 1 583.4194 219.7747 0.09147219 101.63334
+    ## 4 539.3670 268.0776 0.09123988 146.52615
+    ## 7 536.3961 264.2803 0.08629031 155.61062
+    ## 2 558.0527 212.0138 0.09238842  73.55455
+    ## 5 527.3135 224.1725 0.08780408 107.48803
+    ## 8 522.1391 274.7072 0.08697576 163.86355
+    ## 3 552.3399 190.5780 0.08495448  58.26536
+    ## 6 539.3820 213.0068 0.08680548  97.61807
+    ## 9 526.9985 257.4165 0.09525579 164.10315
+
+``` r
+boostPred <- predict(boostFit, newdata = df.test)
+boostRMSE <- sqrt(mean((boostPred-df.test$cnt)^2))
+```
+
+# Model Comparison
+
+``` r
+tbl.rmse <- rbind.data.frame("tree" = treeRMSE, "boost" = boostRMSE)
+colnames(tbl.rmse) <- "RMSE"
+rownames(tbl.rmse) <- c("Reg. Tree", "Boost Tree")
+kable(tbl.rmse, caption = "Comparison of Models' RMSE")
+```
+
+|            |     RMSE |
+| ---------- | -------: |
+| Reg. Tree  | 1594.290 |
+| Boost Tree | 1171.718 |
+
+Comparison of Models’ RMSE

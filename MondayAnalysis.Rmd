@@ -13,6 +13,8 @@ library(ggplot2)
 library(GGally)
 library(corrplot)
 library(expss)
+library(gridExtra)
+library(caret)
 ```
 
 # Introduction  
@@ -114,7 +116,7 @@ df.tbl.train <- apply_labels(df.train,
                                       "Extreme" = 4),
                        dayofweek = "Day of Week")
 attach(df.tbl.train)
-cro_cases(list(holiday, weathersit), dayofweek,
+cro_cases(weathersit, mnth,
           total_row_position = "none")
 detach(df.tbl.train)
 
@@ -130,27 +132,75 @@ df.tbl.train %>%
   tab_pivot()
 ```
 
+#### Figure 4. Qualitative variables: Boxplots   
+```{r}
+boxplot1 <- df.train %>%
+  ggplot(aes(x = factor(mnth), y = cnt)) +
+  geom_boxplot()
+
+boxplot2 <- df.train %>%
+  ggplot(aes(x = factor(weathersit), y = cnt)) +
+  geom_boxplot() 
+
+boxplot3 <- df.train %>%
+  ggplot(aes(x = factor(holiday), y = cnt)) +
+  geom_boxplot() 
+
+boxplot4 <- df.train %>%
+  ggplot(aes(x = factor(yr), y = cnt)) +
+  geom_boxplot()
+
+grid.arrange(boxplot4, boxplot1, boxplot3, boxplot2)
+```
+
+#### Figure 5. Quantitative variables: Scatterplots    
 ```{r}
 df.train %>%
   gather(avgTemp, hum, windspeed, key = "var", value = "value") %>%
   mutate(var = factor(var, levels = c("hum", "avgTemp", "windspeed"))) %>%
-  ggplot(aes(x = value)) +
-  geom_histogram() +
-  facet_wrap(~var, scales = "free", nrow = 2) 
-
-
-
-df.train %>%
-  gather(avgTemp, hum, windspeed, key = "var", value = "value") %>%
-  mutate(var = factor(var, levels = c("hum", "avgTemp", "windspeed"))) %>%
-  ggplot(aes(x = value, y = cnt, color = factor(yr), shape = factor(season))) +
+  ggplot(aes(x = value, y = cnt, color = factor(yr))) +
   geom_point() +
   geom_smooth(aes(group = factor(yr))) +
   facet_wrap(~var, scales = "free", nrow = 2) 
 ```
 
+# Modeling  
+
+## Tree-based Model  
+```{r}
+treeFit <- train(cnt ~ yr + mnth + holiday + weathersit + avgTemp + hum + windspeed, data = df.train,
+                  method = "rpart",
+                  trControl = trainControl(method = "LOOCV")
+                  )
+treeFit$results
+
+treePred <- predict(treeFit, newdata = df.test)
+treeRMSE <- sqrt(mean((treePred-df.test$cnt)^2))
+```
 
 
+
+
+## Boosted Tree Model  
+```{r}
+boostFit <- train(cnt ~ yr + mnth + holiday + weathersit + avgTemp + hum + windspeed, data = df.train,
+                  method = "gbm",
+                  trControl = trainControl(method = "cv", number = 10),
+                  preProcess = c("center", "scale"),
+                  verbose = FALSE)
+boostFit$results
+
+boostPred <- predict(boostFit, newdata = df.test)
+boostRMSE <- sqrt(mean((boostPred-df.test$cnt)^2))
+```
+
+# Model Comparison  
+```{r}
+tbl.rmse <- rbind.data.frame("tree" = treeRMSE, "boost" = boostRMSE)
+colnames(tbl.rmse) <- "RMSE"
+rownames(tbl.rmse) <- c("Reg. Tree", "Boost Tree")
+kable(tbl.rmse, caption = "Comparison of Models' RMSE")
+```
 
 
 
