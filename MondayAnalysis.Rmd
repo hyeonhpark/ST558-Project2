@@ -7,9 +7,11 @@ output: rmarkdown::github_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+library(knitr)
 library(tidyverse)
 library(ggplot2)
 library(GGally)
+library(corrplot)
 ```
 
 # Introduction  
@@ -18,32 +20,17 @@ You should have an introduction section that briefly describes the data and the 
 
 You should also mention the purpose of your analysis and the methods you’ll use (no need to detail them here) for analysis.
 
+See Figure \ref{fig:correlation-plot}.
 
 # Data  
-```{r}
+```{r, message = FALSE, warning = FALSE}
 # Read in data
 url <- "https://archive.ics.uci.edu/ml/machine-learning-databases/00275/Bike-Sharing-Dataset.zip"
 download.file(url, "Bike-Sharing-Dataset.zip")
 
 unzip("Bike-Sharing-Dataset.zip", exdir = "./Data")
-df.bike <- read_csv("/Data/day.csv")
-
-df.bike.day <- df.bike %>%
-  select(-casual, -registered) %>%
-  filter(weekday == 1)
-
-# Randomply sample from the data 
-# Form training and test sets
-train <- sample(1:nrow(df.bike.day), size = nrow(df.bike.day)*0.7)
-test <- dplyr::setdiff(1:nrow(df.bike.day), train)
-df.train <- df.bike.day[train, ]
-df.test <- df.bike.day[test, ]
-```
-
-# Summarizations  
-```{r}
-# Full data
-df.bike <- df.bike %>%  
+df.bike <- read_csv("/Data/day.csv") %>%
+  select(-instant, -casual, -registered) %>%
   mutate(dayofweek = recode(weekday,
                             `0` = "Sunday",
                             `1` = "Monday",
@@ -52,15 +39,61 @@ df.bike <- df.bike %>%
                             `4` = "Thursday",
                             `5` = "Friday",
                             `6` = "Saturday"))
+  #Combine variables temp and atemp
 
-ggplot(df.bike, aes(x = dayofweek)) +
-  geom_bar()
-  
+df.bike.day <- df.bike %>%
+  filter(weekday == 1)
 
+#Randomply sample from the data 
+#Form training and test sets
+train <- sample(1:nrow(df.bike.day), size = nrow(df.bike.day)*0.7)
+test <- dplyr::setdiff(1:nrow(df.bike.day), train)
+df.train <- df.bike.day[train, ]
+df.test <- df.bike.day[test, ]
+```
+
+# Summarizations  
+## Full Data  
+
+### Correlation Plot  
+```{r correlation-plot, fig.cap = "Correlation Plot"}
+corrplot(cor(df.bike[,2:13]))
+```
+
+```{r}
+
+#Qualitative variables: Contingency tables
+
+
+#Quantitative variables: Summary statistics
+
+
+
+
+#Histograms of quantitative variables
+df.bike %>%
+  gather(temp, atemp, hum, windspeed, key = "var", value = "value") %>%
+  ggplot(aes(x = value)) +
+  geom_histogram() +
+  facet_wrap(~var, scales = "free") 
+
+#Scatterplot of response variable(cnt) over days
 ggplot(df.bike, aes(x = dteday, y = cnt)) +
   geom_point(aes(colour = factor(holiday)))
 
-# Specific day data
+```
+
+## Specific Day of the Week Data  
+```{r}
+
+df.train %>%
+  gather(temp, atemp, hum, windspeed, key = "var", value = "value") %>%
+  ggplot(aes(x = value)) +
+  geom_histogram() +
+  facet_wrap(~var, scales = "free") 
+
+
+
 df.train %>%
   gather(temp, atemp, hum, windspeed, key = "var", value = "value") %>%
   ggplot(aes(x = value, y = cnt, color = factor(yr), shape = factor(season))) +
