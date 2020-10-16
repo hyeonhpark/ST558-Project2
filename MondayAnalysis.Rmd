@@ -19,10 +19,32 @@ library(caret)
 
 # Introduction  
 
-You should have an introduction section that briefly describes the data and the variables you have to work with (no need to discuss all of them, just the ones you want to use). **If you are analyzing the bike share data, do not use the casual and registered variables to do any modeling!**  
+Bike sharing systems is a service in which bicycles are made available for shared use to individuals on a short term basis. Bike share systems allow individuals to rent a bike from a particular position and return it at another through an automated process. This automated process, which explicitly records departure and arrival positions and other related observations such as date and duration of the rental, generates a vast amount of data that can be used for research in areas such as traffic, environmental and health issues, mobility in the city, and etc. In this document, data on count of total rental bikes aggregated on daily basis is used to create models for predicting the count using predictors related to the day of the rental and the weather.  
 
-You should also mention the purpose of your analysis and the methods you’ll use (no need to detail them here) for analysis.
+The original data set is related to the two-year historical log corresponding to years 2011 and 2012 from Capital Bikeshare system, Washington D.C., USA which is publicly available in [http://capitalbikeshare.com/system-data]. The original data set consists of the following variables:  
 
+- instant: record index  
+- dteday : date  
+- season : season (1:springer, 2:summer, 3:fall, 4:winter)  
+- yr : year (0: 2011, 1:2012)  
+- mnth : month ( 1 to 12)  
+- holiday : weather day is holiday or not (extracted from [Department of HR Holiday Schedule](http://dchr.dc.gov/page/holiday-schedule))  
+- weekday : day of the week (0 to 6: Sunday to Monday)    
+- workingday : if day is neither weekend nor holiday is 1, otherwise is 0.  
+- weathersit :   
+  - 1: Clear, Few clouds, Partly cloudy, Partly cloudy  
+  - 2: Mist + Cloudy, Mist + Broken clouds, Mist + Few clouds, Mist  
+  - 3: Light Snow, Light Rain + Thunderstorm + Scattered clouds, Light Rain + Scattered clouds  
+  - 4: Heavy Rain + Ice Pallets + Thunderstorm + Mist, Snow + Fog  
+- temp : Normalized temperature in Celsius. The values are divided to 41 (max)  
+- atemp: Normalized feeling temperature in Celsius. The values are divided to 50 (max)  
+- hum: Normalized humidity. The values are divided to 100 (max)  
+- windspeed: Normalized wind speed. The values are divided to 67 (max)  
+- casual: count of casual users  
+- registered: count of registered users  
+- cnt: count of total rental bikes including both casual and registered  
+
+A tree-based model chosen using leave one out cross validation(LOOCV) and a boosted tree model chosen using cross-validation are used to model the count of total rental bikes (cnt). Some variables from the original data set were removed/transformed from the models to avoid multicollinearity. Variables season and month (mnth), as well as variables temp and atemp, were highly correlated with each other according to the [correlation plot](correlation-plot-1.png). Variable month (mnth) was chosen over variable season to minimize the loss of information and also because month was more highly correlated with the response variable (cnt) than season. Variables temp and atemp were combined and their average was used in the models. Thus, the predictor variables used in the models are year (yr), month (mnth), holiday, weather (weathersit), average temperature (average of temp and atemp), humidity (hum), and wind speed (windspeed). 
 
 # Data  
 ```{r, message = FALSE, warning = FALSE}
@@ -68,6 +90,7 @@ corrplot(cor(df.bike[,2:13]))
 #### Table 1. Qualitative variables: Contingency tables  
 ```{r}
 df.tbl <- apply_labels(df.bike,
+                       dteday = "Date",
                        holiday = "Holiday",
                        holiday = c("No" = 0,
                                    "Yes" = 1),
@@ -76,7 +99,13 @@ df.tbl <- apply_labels(df.bike,
                                       "Moderate" = 2,
                                       "Bad" = 3,
                                       "Extreme" = 4),
-                       dayofweek = "Day of Week")
+                       dayofweek = "Day of Week",
+                       yr = "Year",
+                       mnth = "Month",
+                       avgTemp = "Average Temperature",
+                       hum = "Humidity",
+                       windspeed = "Wind Speed",
+                       cnt = "Count of Total Rental Bikes")
 attach(df.tbl)
 cro_cases(list(holiday, weathersit), dayofweek,
           total_row_position = "none")
