@@ -3,6 +3,8 @@ title: "ST 558 Project 2"
 author: "Hannah Park"
 date: "10/15/2020"
 output: rmarkdown::github_document
+params:
+  dayofweek: "Monday"
 ---
 
 ```{r setup, include=FALSE}
@@ -69,7 +71,7 @@ df.bike <- read_csv("/Data/day.csv") %>%
 
 # Filter by specific day of week
 df.bike.day <- df.bike %>%
-  filter(weekday == 1)
+  filter(dayofweek == params$dayofweek)
 
 #Randomply sample from the data 
 #Form training and test sets
@@ -114,7 +116,7 @@ df.tbl <- apply_labels(df.bike,
                        windspeed = "Wind Speed",
                        cnt = "Count of Total Rental Bikes")
 attach(df.tbl)
-cro_cases(list(holiday, weathersit), dayofweek,
+cro_cases(list(holiday, weathersit), df.tbl$dayofweek,
           total_row_position = "none")
 detach(df.tbl)
 ```
@@ -148,7 +150,7 @@ df.bike %>%
   ylab("Count of Total Rental Bikes")
 ```
 
-## Specific Day of the Week Data  
+## Specific Day of the Week Data: `r params$dayofweek`    
 
 In this section, summary statistics and plots about the training data used for modeling are provided. All statistics and plots are generated from data set consisting of a specific day of the week only: Monday.  
 

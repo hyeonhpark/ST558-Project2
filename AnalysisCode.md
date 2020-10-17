@@ -120,7 +120,7 @@ corrplot(cor(df.bike[,2:13]))
 ```
 
 ![Correlation
-Plot](MondayAnalysis_files/figure-gfm/full-data-correlation-plot-1.png)
+Plot](AnalysisCode_files/figure-gfm/full-data-correlation-plot-1.png)
 
 #### Table 1. Qualitative variables: Contingency tables
 
@@ -148,33 +148,9 @@ df.tbl <- apply_labels(df.bike,
                        windspeed = "Wind Speed",
                        cnt = "Count of Total Rental Bikes")
 attach(df.tbl)
-```
-
-    ## The following object is masked _by_ .GlobalEnv:
-    ## 
-    ##     dayofweek
-
-    ## The following objects are masked from df.tbl (pos = 3):
-    ## 
-    ##     atemp, avgTemp, cnt, dayofweek, dteday, holiday, hum, mnth, season, temp,
-    ##     weathersit, weekday, windspeed, workingday, yr
-
-    ## The following objects are masked from df.tbl (pos = 4):
-    ## 
-    ##     atemp, avgTemp, cnt, dayofweek, dteday, holiday, hum, mnth, season, temp,
-    ##     weathersit, weekday, windspeed, workingday, yr
-
-    ## The following objects are masked from df.tbl.train:
-    ## 
-    ##     atemp, avgTemp, cnt, dayofweek, dteday, holiday, hum, mnth, season, temp,
-    ##     weathersit, weekday, windspeed, workingday, yr
-
-``` r
-cro_cases(list(holiday, weathersit), df.tbl$dayofweek,
+cro_cases(list(holiday, weathersit), dayofweek,
           total_row_position = "none")
 ```
-
-<!--html_preserve-->
 
 <table class="gmisc_table" style="border-collapse: collapse; margin-top: 1em; margin-bottom: 1em;">
 
@@ -564,8 +540,6 @@ cro_cases(list(holiday, weathersit), df.tbl$dayofweek,
 
 </table>
 
-<!--/html_preserve-->
-
 ``` r
 detach(df.tbl)
 ```
@@ -590,7 +564,7 @@ df.bike %>%
                                       windspeed = "Wind Speed"))) 
 ```
 
-![](MondayAnalysis_files/figure-gfm/full-data-histograms-1.png)<!-- -->
+![](AnalysisCode_files/figure-gfm/full-data-histograms-1.png)<!-- -->
 
 #### Figure 3. Scatterplot of response variable(cnt) over days
 
@@ -610,7 +584,7 @@ df.bike %>%
   ylab("Count of Total Rental Bikes")
 ```
 
-![](MondayAnalysis_files/figure-gfm/full-data-scatterplot-1.png)<!-- -->
+![](AnalysisCode_files/figure-gfm/full-data-scatterplot-1.png)<!-- -->
 
 ## Specific Day of the Week Data: Monday
 
@@ -643,33 +617,9 @@ df.tbl.train <- apply_labels(df.train,
                              cnt = "Count of Total Rental Bikes")
                        
 attach(df.tbl.train)
-```
-
-    ## The following object is masked _by_ .GlobalEnv:
-    ## 
-    ##     dayofweek
-
-    ## The following objects are masked from df.tbl (pos = 3):
-    ## 
-    ##     atemp, avgTemp, cnt, dayofweek, dteday, holiday, hum, mnth, season, temp,
-    ##     weathersit, weekday, windspeed, workingday, yr
-
-    ## The following objects are masked from df.tbl (pos = 4):
-    ## 
-    ##     atemp, avgTemp, cnt, dayofweek, dteday, holiday, hum, mnth, season, temp,
-    ##     weathersit, weekday, windspeed, workingday, yr
-
-    ## The following objects are masked from df.tbl.train (pos = 8):
-    ## 
-    ##     atemp, avgTemp, cnt, dayofweek, dteday, holiday, hum, mnth, season, temp,
-    ##     weathersit, weekday, windspeed, workingday, yr
-
-``` r
 cro_cases(list(yr, holiday,weathersit), mnth,
           total_row_position = "none")
 ```
-
-<!--html_preserve-->
 
 <table class="gmisc_table" style="border-collapse: collapse; margin-top: 1em; margin-bottom: 1em;">
 
@@ -1407,8 +1357,6 @@ cro_cases(list(yr, holiday,weathersit), mnth,
 
 </table>
 
-<!--/html_preserve-->
-
 ``` r
 detach(df.tbl.train)
 ```
@@ -1426,8 +1374,6 @@ df.tbl.train %>%
                Mean = w_mean, Max = w_max) %>%
   tab_pivot()
 ```
-
-<!--html_preserve-->
 
 <table class="gmisc_table" style="border-collapse: collapse; margin-top: 1em; margin-bottom: 1em;">
 
@@ -2549,8 +2495,6 @@ df.tbl.train %>%
 
 </table>
 
-<!--/html_preserve-->
-
 #### Figure 4. Qualitative variables: Boxplots
 
 Boxplots of qualitative variables (year, month, holiday and weather) are
@@ -2590,7 +2534,7 @@ boxplot4 <- df.train %>%
 grid.arrange(boxplot4, boxplot1, boxplot3, boxplot2)
 ```
 
-![](MondayAnalysis_files/figure-gfm/day-data-boxplot-1.png)<!-- -->
+![](AnalysisCode_files/figure-gfm/day-data-boxplot-1.png)<!-- -->
 
 #### Figure 5. Quantitative variables: Scatterplots
 
@@ -2613,7 +2557,7 @@ df.train %>%
                                       windspeed = "Wind Speed"))) 
 ```
 
-![](MondayAnalysis_files/figure-gfm/dat-data-scatterplot-1.png)<!-- -->
+![](AnalysisCode_files/figure-gfm/dat-data-scatterplot-1.png)<!-- -->
 
 # Modeling
 
@@ -2666,7 +2610,7 @@ fancyRpartPlot(fit.tree$finalModel,
                sub = "")
 ```
 
-![](MondayAnalysis_files/figure-gfm/regression-tree-final-model-results-1.png)<!-- -->
+![](AnalysisCode_files/figure-gfm/regression-tree-final-model-results-1.png)<!-- -->
 
 ### Final chosen model
 
@@ -2733,7 +2677,7 @@ kable(fit.boost$results[c(1,4,2,5)],
 plot(fit.boost)
 ```
 
-![](MondayAnalysis_files/figure-gfm/boosted-tree-final-model-results-1.png)<!-- -->
+![](AnalysisCode_files/figure-gfm/boosted-tree-final-model-results-1.png)<!-- -->
 
 ### Final chosen model
 

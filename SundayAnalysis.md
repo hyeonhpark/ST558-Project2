@@ -120,7 +120,7 @@ corrplot(cor(df.bike[,2:13]))
 ```
 
 ![Correlation
-Plot](MondayAnalysis_files/figure-gfm/full-data-correlation-plot-1.png)
+Plot](SundayAnalysis_files/figure-gfm/full-data-correlation-plot-1.png)
 
 #### Table 1. Qualitative variables: Contingency tables
 
@@ -590,7 +590,7 @@ df.bike %>%
                                       windspeed = "Wind Speed"))) 
 ```
 
-![](MondayAnalysis_files/figure-gfm/full-data-histograms-1.png)<!-- -->
+![](SundayAnalysis_files/figure-gfm/full-data-histograms-1.png)<!-- -->
 
 #### Figure 3. Scatterplot of response variable(cnt) over days
 
@@ -610,9 +610,9 @@ df.bike %>%
   ylab("Count of Total Rental Bikes")
 ```
 
-![](MondayAnalysis_files/figure-gfm/full-data-scatterplot-1.png)<!-- -->
+![](SundayAnalysis_files/figure-gfm/full-data-scatterplot-1.png)<!-- -->
 
-## Specific Day of the Week Data: Monday
+## Specific Day of the Week Data: Sunday
 
 In this section, summary statistics and plots about the training data
 used for modeling are provided. All statistics and plots are generated
@@ -829,13 +829,13 @@ cro_cases(list(yr, holiday,weathersit), mnth,
 
 <td style="text-align: right;">
 
-3
+4
 
 </td>
 
 <td style="text-align: right;">
 
-4
+3
 
 </td>
 
@@ -923,13 +923,13 @@ cro_cases(list(yr, holiday,weathersit), mnth,
 
 <td style="text-align: right;">
 
-2
+3
 
 </td>
 
 <td style="text-align: right;">
 
-3
+2
 
 </td>
 
@@ -967,13 +967,13 @@ cro_cases(list(yr, holiday,weathersit), mnth,
 
 <td style="text-align: right;">
 
-4
+7
 
 </td>
 
 <td style="text-align: right;">
 
-3
+5
 
 </td>
 
@@ -985,25 +985,7 @@ cro_cases(list(yr, holiday,weathersit), mnth,
 
 <td style="text-align: right;">
 
-6
-
-</td>
-
-<td style="text-align: right;">
-
-6
-
-</td>
-
-<td style="text-align: right;">
-
-6
-
-</td>
-
-<td style="text-align: right;">
-
-5
+7
 
 </td>
 
@@ -1015,25 +997,43 @@ cro_cases(list(yr, holiday,weathersit), mnth,
 
 <td style="text-align: right;">
 
-3
+6
+
+</td>
+
+<td style="text-align: right;">
+
+7
+
+</td>
+
+<td style="text-align: right;">
+
+6
+
+</td>
+
+<td style="text-align: right;">
+
+6
 
 </td>
 
 <td style="text-align: right;">
 
 3
-
-</td>
-
-<td style="text-align: right;">
-
-4
 
 </td>
 
 <td style="text-align: right;">
 
 5
+
+</td>
+
+<td style="text-align: right;">
+
+6
 
 </td>
 
@@ -1049,14 +1049,6 @@ cro_cases(list(yr, holiday,weathersit), mnth,
 
 <td style="text-align: right;">
 
-3
-
-</td>
-
-<td style="text-align: right;">
-
-2
-
 </td>
 
 <td style="text-align: right;">
@@ -1064,14 +1056,6 @@ cro_cases(list(yr, holiday,weathersit), mnth,
 </td>
 
 <td style="text-align: right;">
-
-1
-
-</td>
-
-<td style="text-align: right;">
-
-1
 
 </td>
 
@@ -1081,7 +1065,13 @@ cro_cases(list(yr, holiday,weathersit), mnth,
 
 <td style="text-align: right;">
 
-1
+</td>
+
+<td style="text-align: right;">
+
+</td>
+
+<td style="text-align: right;">
 
 </td>
 
@@ -1091,25 +1081,17 @@ cro_cases(list(yr, holiday,weathersit), mnth,
 
 <td style="text-align: right;">
 
-2
+</td>
+
+<td style="text-align: right;">
 
 </td>
 
 <td style="text-align: right;">
 
-1
-
 </td>
 
 <td style="text-align: right;">
-
-1
-
-</td>
-
-<td style="text-align: right;">
-
-1
 
 </td>
 
@@ -1135,37 +1117,37 @@ cro_cases(list(yr, holiday,weathersit), mnth,
 
 <td style="text-align: right;">
 
+6
+
+</td>
+
+<td style="text-align: right;">
+
 4
 
 </td>
 
 <td style="text-align: right;">
 
-3
+4
 
 </td>
 
 <td style="text-align: right;">
 
-7
+4
 
 </td>
 
 <td style="text-align: right;">
 
-5
+4
 
 </td>
 
 <td style="text-align: right;">
 
-3
-
-</td>
-
-<td style="text-align: right;">
-
-3
+4
 
 </td>
 
@@ -1177,7 +1159,13 @@ cro_cases(list(yr, holiday,weathersit), mnth,
 
 <td style="text-align: right;">
 
-5
+3
+
+</td>
+
+<td style="text-align: right;">
+
+4
 
 </td>
 
@@ -1189,17 +1177,13 @@ cro_cases(list(yr, holiday,weathersit), mnth,
 
 <td style="text-align: right;">
 
-</td>
-
-<td style="text-align: right;">
-
 4
 
 </td>
 
 <td style="text-align: right;">
 
-3
+4
 
 </td>
 
@@ -1215,7 +1199,55 @@ cro_cases(list(yr, holiday,weathersit), mnth,
 
 <td style="text-align: right;">
 
+1
+
+</td>
+
+<td style="text-align: right;">
+
+1
+
+</td>
+
+<td style="text-align: right;">
+
+4
+
+</td>
+
+<td style="text-align: right;">
+
 3
+
+</td>
+
+<td style="text-align: right;">
+
+3
+
+</td>
+
+<td style="text-align: right;">
+
+2
+
+</td>
+
+<td style="text-align: right;">
+
+2
+
+</td>
+
+<td style="text-align: right;">
+
+3
+
+</td>
+
+<td style="text-align: right;">
+
+2
 
 </td>
 
@@ -1234,52 +1266,6 @@ cro_cases(list(yr, holiday,weathersit), mnth,
 <td style="text-align: right;">
 
 2
-
-</td>
-
-<td style="text-align: right;">
-
-4
-
-</td>
-
-<td style="text-align: right;">
-
-3
-
-</td>
-
-<td style="text-align: right;">
-
-1
-
-</td>
-
-<td style="text-align: right;">
-
-2
-
-</td>
-
-<td style="text-align: right;">
-
-4
-
-</td>
-
-<td style="text-align: right;">
-
-4
-
-</td>
-
-<td style="text-align: right;">
-
-</td>
-
-<td style="text-align: right;">
-
-3
 
 </td>
 
@@ -1334,8 +1320,6 @@ cro_cases(list(yr, holiday,weathersit), mnth,
 </td>
 
 <td style="text-align: right;">
-
-1
 
 </td>
 
@@ -1563,7 +1547,7 @@ df.tbl.train %>%
 
 <td style="text-align: right;">
 
-0.2
+0.3
 
 </td>
 
@@ -1575,7 +1559,7 @@ df.tbl.train %>%
 
 <td style="text-align: right;">
 
-0.5
+0.4
 
 </td>
 
@@ -1587,7 +1571,7 @@ df.tbl.train %>%
 
 <td style="text-align: right;">
 
-0.7
+0.6
 
 </td>
 
@@ -1639,55 +1623,55 @@ df.tbl.train %>%
 
 <td style="text-align: right;">
 
-0.4
+0.3
 
 </td>
 
 <td style="text-align: right;">
 
 0.4
-
-</td>
-
-<td style="text-align: right;">
-
-0.6
-
-</td>
-
-<td style="text-align: right;">
-
-0.6
-
-</td>
-
-<td style="text-align: right;">
-
-0.6
-
-</td>
-
-<td style="text-align: right;">
-
-0.7
-
-</td>
-
-<td style="text-align: right;">
-
-0.7
-
-</td>
-
-<td style="text-align: right;">
-
-0.6
 
 </td>
 
 <td style="text-align: right;">
 
 0.5
+
+</td>
+
+<td style="text-align: right;">
+
+0.6
+
+</td>
+
+<td style="text-align: right;">
+
+0.7
+
+</td>
+
+<td style="text-align: right;">
+
+0.7
+
+</td>
+
+<td style="text-align: right;">
+
+0.7
+
+</td>
+
+<td style="text-align: right;">
+
+0.6
+
+</td>
+
+<td style="text-align: right;">
+
+0.4
 
 </td>
 
@@ -1715,7 +1699,7 @@ df.tbl.train %>%
 
 <td style="text-align: right;">
 
-0.2
+0.3
 
 </td>
 
@@ -1745,12 +1729,6 @@ df.tbl.train %>%
 
 <td style="text-align: right;">
 
-0.6
-
-</td>
-
-<td style="text-align: right;">
-
 0.7
 
 </td>
@@ -1763,13 +1741,19 @@ df.tbl.train %>%
 
 <td style="text-align: right;">
 
+0.7
+
+</td>
+
+<td style="text-align: right;">
+
 0.6
 
 </td>
 
 <td style="text-align: right;">
 
-0.5
+0.4
 
 </td>
 
@@ -1797,13 +1781,13 @@ df.tbl.train %>%
 
 <td style="text-align: right;">
 
-0.3
+0.4
 
 </td>
 
 <td style="text-align: right;">
 
-0.4
+0.3
 
 </td>
 
@@ -1821,37 +1805,37 @@ df.tbl.train %>%
 
 <td style="text-align: right;">
 
-0.7
-
-</td>
-
-<td style="text-align: right;">
-
-0.7
-
-</td>
-
-<td style="text-align: right;">
-
-0.7
-
-</td>
-
-<td style="text-align: right;">
-
-0.7
-
-</td>
-
-<td style="text-align: right;">
-
-0.7
-
-</td>
-
-<td style="text-align: right;">
-
 0.6
+
+</td>
+
+<td style="text-align: right;">
+
+0.7
+
+</td>
+
+<td style="text-align: right;">
+
+0.8
+
+</td>
+
+<td style="text-align: right;">
+
+0.8
+
+</td>
+
+<td style="text-align: right;">
+
+0.7
+
+</td>
+
+<td style="text-align: right;">
+
+0.5
 
 </td>
 
@@ -1901,13 +1885,31 @@ df.tbl.train %>%
 
 <td style="text-align: right;">
 
-0.3
+0.4
 
 </td>
 
 <td style="text-align: right;">
 
-0.4
+0.5
+
+</td>
+
+<td style="text-align: right;">
+
+0.5
+
+</td>
+
+<td style="text-align: right;">
+
+0.5
+
+</td>
+
+<td style="text-align: right;">
+
+0.5
 
 </td>
 
@@ -1919,25 +1921,7 @@ df.tbl.train %>%
 
 <td style="text-align: right;">
 
-0.5
-
-</td>
-
-<td style="text-align: right;">
-
-0.4
-
-</td>
-
-<td style="text-align: right;">
-
-0.5
-
-</td>
-
-<td style="text-align: right;">
-
-0.7
+0.6
 
 </td>
 
@@ -2007,30 +1991,6 @@ df.tbl.train %>%
 
 <td style="text-align: right;">
 
-0.7
-
-</td>
-
-<td style="text-align: right;">
-
-0.7
-
-</td>
-
-<td style="text-align: right;">
-
-0.8
-
-</td>
-
-<td style="text-align: right;">
-
-0.7
-
-</td>
-
-<td style="text-align: right;">
-
 0.6
 
 </td>
@@ -2038,6 +1998,30 @@ df.tbl.train %>%
 <td style="text-align: right;">
 
 0.7
+
+</td>
+
+<td style="text-align: right;">
+
+0.7
+
+</td>
+
+<td style="text-align: right;">
+
+0.7
+
+</td>
+
+<td style="text-align: right;">
+
+0.5
+
+</td>
+
+<td style="text-align: right;">
+
+0.6
 
 </td>
 
@@ -2053,12 +2037,6 @@ df.tbl.train %>%
 
 <td style="text-align: right;">
 
-0.5
-
-</td>
-
-<td style="text-align: right;">
-
 0.6
 
 </td>
@@ -2077,6 +2055,12 @@ df.tbl.train %>%
 
 <td style="text-align: right;">
 
+0.6
+
+</td>
+
+<td style="text-align: right;">
+
 0.7
 
 </td>
@@ -2095,25 +2079,25 @@ df.tbl.train %>%
 
 <td style="text-align: right;">
 
+0.7
+
+</td>
+
+<td style="text-align: right;">
+
+0.7
+
+</td>
+
+<td style="text-align: right;">
+
+0.7
+
+</td>
+
+<td style="text-align: right;">
+
 0.6
-
-</td>
-
-<td style="text-align: right;">
-
-0.8
-
-</td>
-
-<td style="text-align: right;">
-
-0.7
-
-</td>
-
-<td style="text-align: right;">
-
-0.7
 
 </td>
 
@@ -2141,6 +2125,24 @@ df.tbl.train %>%
 
 <td style="text-align: right;">
 
+0.7
+
+</td>
+
+<td style="text-align: right;">
+
+0.9
+
+</td>
+
+<td style="text-align: right;">
+
+0.9
+
+</td>
+
+<td style="text-align: right;">
+
 0.9
 
 </td>
@@ -2178,24 +2180,6 @@ df.tbl.train %>%
 <td style="text-align: right;">
 
 0.7
-
-</td>
-
-<td style="text-align: right;">
-
-0.8
-
-</td>
-
-<td style="text-align: right;">
-
-0.8
-
-</td>
-
-<td style="text-align: right;">
-
-0.9
 
 </td>
 
@@ -2233,19 +2217,7 @@ df.tbl.train %>%
 
 <td style="text-align: right;">
 
-0.2
-
-</td>
-
-<td style="text-align: right;">
-
 0.1
-
-</td>
-
-<td style="text-align: right;">
-
-0.2
 
 </td>
 
@@ -2287,7 +2259,19 @@ df.tbl.train %>%
 
 <td style="text-align: right;">
 
-0.0
+0.1
+
+</td>
+
+<td style="text-align: right;">
+
+0.1
+
+</td>
+
+<td style="text-align: right;">
+
+0.1
 
 </td>
 
@@ -2315,7 +2299,7 @@ df.tbl.train %>%
 
 <td style="text-align: right;">
 
-0.3
+0.2
 
 </td>
 
@@ -2327,7 +2311,19 @@ df.tbl.train %>%
 
 <td style="text-align: right;">
 
-0.3
+0.2
+
+</td>
+
+<td style="text-align: right;">
+
+0.2
+
+</td>
+
+<td style="text-align: right;">
+
+0.1
 
 </td>
 
@@ -2352,18 +2348,6 @@ df.tbl.train %>%
 <td style="text-align: right;">
 
 0.2
-
-</td>
-
-<td style="text-align: right;">
-
-0.2
-
-</td>
-
-<td style="text-align: right;">
-
-0.1
 
 </td>
 
@@ -2397,24 +2381,6 @@ df.tbl.train %>%
 
 <td style="text-align: right;">
 
-0.3
-
-</td>
-
-<td style="text-align: right;">
-
-0.2
-
-</td>
-
-<td style="text-align: right;">
-
-0.3
-
-</td>
-
-<td style="text-align: right;">
-
 0.2
 
 </td>
@@ -2439,7 +2405,25 @@ df.tbl.train %>%
 
 <td style="text-align: right;">
 
+0.1
+
+</td>
+
+<td style="text-align: right;">
+
 0.2
+
+</td>
+
+<td style="text-align: right;">
+
+0.2
+
+</td>
+
+<td style="text-align: right;">
+
+0.1
 
 </td>
 
@@ -2479,19 +2463,25 @@ df.tbl.train %>%
 
 <td style="border-bottom: 2px solid grey; text-align: right;">
 
-0.4
+0.3
 
 </td>
 
 <td style="border-bottom: 2px solid grey; text-align: right;">
 
-0.4
+0.3
 
 </td>
 
 <td style="border-bottom: 2px solid grey; text-align: right;">
 
-0.4
+0.3
+
+</td>
+
+<td style="border-bottom: 2px solid grey; text-align: right;">
+
+0.3
 
 </td>
 
@@ -2503,13 +2493,7 @@ df.tbl.train %>%
 
 <td style="border-bottom: 2px solid grey; text-align: right;">
 
-0.3
-
-</td>
-
-<td style="border-bottom: 2px solid grey; text-align: right;">
-
-0.3
+0.2
 
 </td>
 
@@ -2590,7 +2574,7 @@ boxplot4 <- df.train %>%
 grid.arrange(boxplot4, boxplot1, boxplot3, boxplot2)
 ```
 
-![](MondayAnalysis_files/figure-gfm/day-data-boxplot-1.png)<!-- -->
+![](SundayAnalysis_files/figure-gfm/day-data-boxplot-1.png)<!-- -->
 
 #### Figure 5. Quantitative variables: Scatterplots
 
@@ -2613,7 +2597,7 @@ df.train %>%
                                       windspeed = "Wind Speed"))) 
 ```
 
-![](MondayAnalysis_files/figure-gfm/dat-data-scatterplot-1.png)<!-- -->
+![](SundayAnalysis_files/figure-gfm/dat-data-scatterplot-1.png)<!-- -->
 
 # Modeling
 
@@ -2655,24 +2639,24 @@ are displayed below.
 kable(fit.tree$results)
 ```
 
-|        cp |     RMSE |  Rsquared |      MAE |
-| --------: | -------: | --------: | -------: |
-| 0.0703925 | 1280.707 | 0.4713403 | 1002.023 |
-| 0.1723088 | 1406.555 | 0.3594723 | 1243.783 |
-| 0.4596918 | 1959.403 | 0.0070811 | 1770.250 |
+|        cp |     RMSE |  Rsquared |       MAE |
+| --------: | -------: | --------: | --------: |
+| 0.0616548 | 1049.320 | 0.6682970 |  866.2614 |
+| 0.1892569 | 1307.244 | 0.4894382 | 1122.8417 |
+| 0.5648940 | 1965.522 | 0.0007342 | 1780.5029 |
 
 ``` r
 fancyRpartPlot(fit.tree$finalModel,
                sub = "")
 ```
 
-![](MondayAnalysis_files/figure-gfm/regression-tree-final-model-results-1.png)<!-- -->
+![](SundayAnalysis_files/figure-gfm/regression-tree-final-model-results-1.png)<!-- -->
 
 ### Final chosen model
 
 Model with the smallest Cp value is chosen as the final regression tree
 model, and for our training data, the final model has a Cp value of
-0.0703925.
+0.0616548.
 
 ### Predictions on the test set
 
@@ -2702,6 +2686,99 @@ fit.boost <- train(cnt ~ yr + mnth + holiday + weathersit + avgTemp + hum + wind
                    verbose = FALSE)
 ```
 
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution = "bernoulli", :
+    ## variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution = "bernoulli", :
+    ## variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution = "bernoulli", :
+    ## variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution = "bernoulli", :
+    ## variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution = "bernoulli", :
+    ## variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution = "bernoulli", :
+    ## variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution = "bernoulli", :
+    ## variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution = "bernoulli", :
+    ## variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution = "bernoulli", :
+    ## variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution = "bernoulli", :
+    ## variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution = "bernoulli", :
+    ## variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution = "bernoulli", :
+    ## variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution = "bernoulli", :
+    ## variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution = "bernoulli", :
+    ## variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution = "bernoulli", :
+    ## variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution = "bernoulli", :
+    ## variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution = "bernoulli", :
+    ## variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution = "bernoulli", :
+    ## variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution = "bernoulli", :
+    ## variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution = "bernoulli", :
+    ## variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution = "bernoulli", :
+    ## variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution = "bernoulli", :
+    ## variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution = "bernoulli", :
+    ## variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution = "bernoulli", :
+    ## variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution = "bernoulli", :
+    ## variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution = "bernoulli", :
+    ## variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution = "bernoulli", :
+    ## variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution = "bernoulli", :
+    ## variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution = "bernoulli", :
+    ## variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution = "bernoulli", :
+    ## variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution = "bernoulli", :
+    ## variable 3: holiday has no variation.
+
 ### Full result
 
 The result of the boosted tree model, displaying the different
@@ -2719,21 +2796,21 @@ kable(fit.boost$results[c(1,4,2,5)],
 
 | Shrinkage | Boosting Iterations | Max Tree Depth |     RMSE |
 | --------: | ------------------: | -------------: | -------: |
-|       0.1 |                  50 |              1 | 822.7659 |
-|       0.1 |                  50 |              2 | 755.0458 |
-|       0.1 |                  50 |              3 | 775.0523 |
-|       0.1 |                 100 |              1 | 770.0274 |
-|       0.1 |                 100 |              2 | 745.4788 |
-|       0.1 |                 100 |              3 | 741.6463 |
-|       0.1 |                 150 |              1 | 749.4813 |
-|       0.1 |                 150 |              2 | 762.7653 |
-|       0.1 |                 150 |              3 | 749.2553 |
+|       0.1 |                  50 |              1 | 845.5494 |
+|       0.1 |                  50 |              2 | 796.3957 |
+|       0.1 |                  50 |              3 | 797.8257 |
+|       0.1 |                 100 |              1 | 823.6673 |
+|       0.1 |                 100 |              2 | 782.8631 |
+|       0.1 |                 100 |              3 | 776.9149 |
+|       0.1 |                 150 |              1 | 796.3819 |
+|       0.1 |                 150 |              2 | 776.4168 |
+|       0.1 |                 150 |              3 | 770.5234 |
 
 ``` r
 plot(fit.boost)
 ```
 
-![](MondayAnalysis_files/figure-gfm/boosted-tree-final-model-results-1.png)<!-- -->
+![](SundayAnalysis_files/figure-gfm/boosted-tree-final-model-results-1.png)<!-- -->
 
 ### Final chosen model
 
@@ -2753,7 +2830,7 @@ kable(fit.boost$bestTune[c(3,1,2)],
 
 | Shrinkage | Boosting Iterations | Max Tree Depth |
 | --------: | ------------------: | -------------: |
-|       0.1 |                 100 |              3 |
+|       0.1 |                 150 |              3 |
 
 ### Predictions on the test set
 
@@ -2779,5 +2856,5 @@ kable(c("Regression Tree" = RMSE.tree, "Boosted Tree" = RMSE.boost),
 
 |                 |     RMSE |
 | --------------- | -------: |
-| Regression Tree | 1423.966 |
-| Boosted Tree    | 1029.307 |
+| Regression Tree | 1150.454 |
+| Boosted Tree    | 1079.006 |
