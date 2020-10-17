@@ -15,6 +15,7 @@ library(corrplot)
 library(expss)
 library(gridExtra)
 library(caret)
+library(rattle)
 ```
 
 # Introduction  
@@ -44,7 +45,7 @@ The original data set is related to the two-year historical log corresponding to
 - registered: count of registered users  
 - cnt: count of total rental bikes including both casual and registered  
 
-A tree-based model chosen using leave one out cross validation(LOOCV) and a boosted tree model chosen using cross-validation are used to model the count of total rental bikes (cnt). Some variables from the original data set were removed/transformed from the models to avoid multicollinearity. Variables season and month (mnth), as well as variables temp and atemp, were highly correlated with each other according to the [correlation plot](correlation-plot-1.png). Variable month (mnth) was chosen over variable season to minimize the loss of information and also because month was more highly correlated with the response variable (cnt) than season. Variables temp and atemp were combined and their average was used in the models. Variables day of the week (weekday) and working day were removed from the models due to their irrelevance. Thus, the predictor variables used in the models are year (yr), month (mnth), holiday, weather (weathersit), average temperature (average of temp and atemp), humidity (hum), and wind speed (windspeed). 
+A tree-based model chosen using leave one out cross validation(LOOCV) and a boosted tree model chosen using cross-validation are used to model the count of total rental bikes (cnt). Some variables from the original data set were removed/transformed from the models to avoid multicollinearity. Variables season and month (mnth), as well as variables temp and atemp, were highly correlated with each other according to the correlation plot (Figure 1 below). Variable month (mnth) was chosen over variable season to minimize the loss of information and also because month was more highly correlated with the response variable (cnt) than season. Variables temp and atemp were combined and their average was used in the models. Variables day of the week (weekday) and working day were removed from the models due to their irrelevance. Thus, the predictor variables used in the models are year (yr), month (mnth), holiday, weather (weathersit), average temperature (average of temp and atemp), humidity (hum), and wind speed (windspeed). 
 
 # Data  
 ```{r, message = FALSE, warning = FALSE}
@@ -249,31 +250,54 @@ df.train %>%
 ```
 
 # Modeling  
+Two models are fitted: a tree-based model chosen using leave one out cross validation (LOOCV) that is non-ensemble and a boosted tree model chosen using cross-validation (CV). For both models, the response variable is the **Count of Total Rental Bikes** (cnt), and the predictor variables are year (yr), month (mnth), holiday, weather (weathersit), average temperature (average of temp and atemp), humidity (hum), and wind speed (windspeed).    
 
 ## Tree-based Model  
-```{r}
-treeFit <- train(cnt ~ yr + mnth + holiday + weathersit + avgTemp + hum + windspeed, data = df.train,
-                  method = "rpart",
-                  trControl = trainControl(method = "LOOCV")
-                  )
-treeFit$results
+A regression tree is fitted using recursive binary splitting to predict the continous response cnt. For every possible value of each predictor, the optimal value that minimizes the Residual Sum of Squares (RSS) is found, and the predictor and its optimal value with the smallest RSS is chosen to split the predictor space into two. This process is repeated to further split the predictor space into several regions (nodes of the tree). To avoid overfitting the data, LOOCV is used to prune back the tree and choose the right number of nodes that decreases variance but improves prediction.     
 
+#### Model fit    
+```{r}
+fit.tree <- train(cnt ~ yr + mnth + holiday + weathersit + avgTemp + hum + windspeed,
+                  data = df.train,
+                  method = "rpart",
+                  trControl = trainControl(method = "LOOCV"))
+```
+
+#### Final chosen model  
+```{r}
+fit.tree$results
+fancyRpartPlot(fit.tree$finalModel)
+
+fit.tree$bestTune
+```
+
+#### Predictions on the test set  
+```{r}
 treePred <- predict(treeFit, newdata = df.test)
 treeRMSE <- sqrt(mean((treePred-df.test$cnt)^2))
 ```
 
-
-
-
 ## Boosted Tree Model  
-```{r}
-boostFit <- train(cnt ~ yr + mnth + holiday + weathersit + avgTemp + hum + windspeed, data = df.train,
-                  method = "gbm",
-                  trControl = trainControl(method = "cv", number = 10),
-                  preProcess = c("center", "scale"),
-                  verbose = FALSE)
-boostFit$results
+In a boosted tree model, tree are added subsequentially, resulting in slow training of trees that helps prevent overfitting of the data. Boosted tree model sequentially combines trees: each new tree fits to the residuals from the previous step. There are three tuning parameters associated with boosting: $\lambda$ - a shrinkage parameter that slows the fitting process, *B* - number of boosting iterations, and *d* - maximum tree depth. Cross validation (CV) is used in our model to select the tuning parameters.  
 
+#### Model fit    
+```{r}
+fit.boost <- train(cnt ~ yr + mnth + holiday + weathersit + avgTemp + hum + windspeed, 
+                   data = df.train,
+                   method = "gbm",
+                   trControl = trainControl(method = "cv", number = 10),
+                   verbose = FALSE)
+```
+
+#### Final chosen model  
+```{r}
+fit.boost$results
+plot(fit.boost)
+fit.boost$bestTune
+```
+
+#### Predictions on the test set  
+```{r}
 boostPred <- predict(boostFit, newdata = df.test)
 boostRMSE <- sqrt(mean((boostPred-df.test$cnt)^2))
 ```
