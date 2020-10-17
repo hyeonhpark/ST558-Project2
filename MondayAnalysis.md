@@ -2590,7 +2590,7 @@ fit.tree <- train(cnt ~ yr + mnth + holiday + weathersit + avgTemp + hum + winds
                   trControl = trainControl(method = "LOOCV"))
 ```
 
-#### Full result
+### Full result
 
 The results of the regression tree model and plot of the decision tree
 are displayed below.
@@ -2617,7 +2617,7 @@ Model with the smallest Cp value is chosen as the final regression tree
 model, and for our training data, the final model has a Cp value of
 0.0703925.
 
-#### Predictions on the test set
+### Predictions on the test set
 
 ``` r
 pred.tree <- predict(fit.tree, newdata = df.test)
@@ -2645,7 +2645,7 @@ fit.boost <- train(cnt ~ yr + mnth + holiday + weathersit + avgTemp + hum + wind
                    verbose = FALSE)
 ```
 
-#### Full result
+### Full result
 
 The result of the boosted tree model, displaying the different
 combinations of tuning parameters and their respective RMSE, and plot of
@@ -2698,7 +2698,7 @@ kable(fit.boost$bestTune[1:3],
 | --------: | ------------------: | -----------------: |
 |       100 |                   3 |                0.1 |
 
-#### Predictions on the test set
+### Predictions on the test set
 
 ``` r
 pred.boost <- predict(fit.boost, newdata = df.test)
