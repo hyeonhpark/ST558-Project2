@@ -71,6 +71,11 @@ apply(reports, MARGIN = 1,
     ## 
     ##   |                                                                              |...............                                                       |  22%
     ## label: full-data-contingency-table
+
+    ## The following object is masked _by_ .GlobalEnv:
+    ## 
+    ##     dayofweek
+
     ##   |                                                                              |.................                                                     |  24%
     ##   ordinary text without R code
     ## 
@@ -88,6 +93,11 @@ apply(reports, MARGIN = 1,
     ## 
     ##   |                                                                              |..........................                                            |  38%
     ## label: day-data-contingency-table
+
+    ## The following object is masked _by_ .GlobalEnv:
+    ## 
+    ##     dayofweek
+
     ##   |                                                                              |............................                                          |  41%
     ##   ordinary text without R code
     ## 
@@ -103,15 +113,12 @@ apply(reports, MARGIN = 1,
     ##   ordinary text without R code
     ## 
     ##   |                                                                              |......................................                                |  54%
-    ## label: dat-data-scatterplot (with options) 
-    ## List of 2
-    ##  $ message: logi FALSE
-    ##  $ warning: logi FALSE
+    ## label: dat-data-scatterplot
 
     ## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
 
     ##   |                                                                              |........................................                              |  57%
-    ##   ordinary text without R code
+    ##    inline R code fragments
     ## 
     ##   |                                                                              |..........................................                            |  59%
     ## label: regression-tree-final-model
@@ -159,11 +166,11 @@ apply(reports, MARGIN = 1,
 
     ## output file: AnalysisCode.knit.md
 
-    ## "C:/Program Files/RStudio/bin/pandoc/pandoc" +RTS -K512m -RTS AnalysisCode.utf8.md --to gfm --from markdown+autolink_bare_uris+tex_math_single_backslash --output MondayAnalysis.md --standalone --template "C:\Users\hyeon\Documents\R\win-library\4.0\rmarkdown\rmarkdown\templates\github_document\resources\default.md" 
+    ## "C:/Program Files/RStudio/bin/pandoc/pandoc" +RTS -K512m -RTS AnalysisCode.utf8.md --to gfm --from markdown+autolink_bare_uris+tex_math_single_backslash --output MondayAnalysis.md --standalone --table-of-contents --toc-depth 2 --template "C:\Users\hyeon\Documents\R\win-library\4.0\rmarkdown\rmarkdown\templates\github_document\resources\default.md" 
     ## "C:/Program Files/RStudio/bin/pandoc/pandoc" +RTS -K512m -RTS MondayAnalysis.md --to html4 --from gfm --output MondayAnalysis.html --standalone --self-contained --highlight-style pygments --template "C:\Users\hyeon\Documents\R\win-library\4.0\rmarkdown\rmarkdown\templates\github_document\resources\preview.html" --variable "github-markdown-css:C:\Users\hyeon\Documents\R\win-library\4.0\rmarkdown\rmarkdown\templates\github_document\resources\github.css" --email-obfuscation none --metadata pagetitle=PREVIEW
 
     ## 
-    ## Preview created: C:\Users\hyeon\AppData\Local\Temp\RtmpqAvZtx\preview-6108d2ab62.html
+    ## Preview created: C:\Users\hyeon\AppData\Local\Temp\RtmpqAvZtx\preview-207a971881.html
 
     ## 
     ## Output created: MondayAnalysis.md
@@ -222,6 +229,11 @@ apply(reports, MARGIN = 1,
     ## 
     ##   |                                                                              |...............                                                       |  22%
     ## label: full-data-contingency-table
+
+    ## The following object is masked _by_ .GlobalEnv:
+    ## 
+    ##     dayofweek
+
     ##   |                                                                              |.................                                                     |  24%
     ##   ordinary text without R code
     ## 
@@ -239,6 +251,11 @@ apply(reports, MARGIN = 1,
     ## 
     ##   |                                                                              |..........................                                            |  38%
     ## label: day-data-contingency-table
+
+    ## The following object is masked _by_ .GlobalEnv:
+    ## 
+    ##     dayofweek
+
     ##   |                                                                              |............................                                          |  41%
     ##   ordinary text without R code
     ## 
@@ -254,15 +271,12 @@ apply(reports, MARGIN = 1,
     ##   ordinary text without R code
     ## 
     ##   |                                                                              |......................................                                |  54%
-    ## label: dat-data-scatterplot (with options) 
-    ## List of 2
-    ##  $ message: logi FALSE
-    ##  $ warning: logi FALSE
+    ## label: dat-data-scatterplot
 
     ## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
 
     ##   |                                                                              |........................................                              |  57%
-    ##   ordinary text without R code
+    ##    inline R code fragments
     ## 
     ##   |                                                                              |..........................................                            |  59%
     ## label: regression-tree-final-model
@@ -284,6 +298,100 @@ apply(reports, MARGIN = 1,
     ## 
     ##   |                                                                              |.....................................................                 |  76%
     ## label: boosted-tree-final-model
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
     ##   |                                                                              |.......................................................               |  78%
     ##   ordinary text without R code
     ## 
@@ -310,11 +418,11 @@ apply(reports, MARGIN = 1,
 
     ## output file: AnalysisCode.knit.md
 
-    ## "C:/Program Files/RStudio/bin/pandoc/pandoc" +RTS -K512m -RTS AnalysisCode.utf8.md --to gfm --from markdown+autolink_bare_uris+tex_math_single_backslash --output TuesdayAnalysis.md --standalone --template "C:\Users\hyeon\Documents\R\win-library\4.0\rmarkdown\rmarkdown\templates\github_document\resources\default.md" 
+    ## "C:/Program Files/RStudio/bin/pandoc/pandoc" +RTS -K512m -RTS AnalysisCode.utf8.md --to gfm --from markdown+autolink_bare_uris+tex_math_single_backslash --output TuesdayAnalysis.md --standalone --table-of-contents --toc-depth 2 --template "C:\Users\hyeon\Documents\R\win-library\4.0\rmarkdown\rmarkdown\templates\github_document\resources\default.md" 
     ## "C:/Program Files/RStudio/bin/pandoc/pandoc" +RTS -K512m -RTS TuesdayAnalysis.md --to html4 --from gfm --output TuesdayAnalysis.html --standalone --self-contained --highlight-style pygments --template "C:\Users\hyeon\Documents\R\win-library\4.0\rmarkdown\rmarkdown\templates\github_document\resources\preview.html" --variable "github-markdown-css:C:\Users\hyeon\Documents\R\win-library\4.0\rmarkdown\rmarkdown\templates\github_document\resources\github.css" --email-obfuscation none --metadata pagetitle=PREVIEW
 
     ## 
-    ## Preview created: C:\Users\hyeon\AppData\Local\Temp\RtmpqAvZtx\preview-610843572b0c.html
+    ## Preview created: C:\Users\hyeon\AppData\Local\Temp\RtmpqAvZtx\preview-20670c6c71.html
 
     ## 
     ## Output created: TuesdayAnalysis.md
@@ -373,6 +481,11 @@ apply(reports, MARGIN = 1,
     ## 
     ##   |                                                                              |...............                                                       |  22%
     ## label: full-data-contingency-table
+
+    ## The following object is masked _by_ .GlobalEnv:
+    ## 
+    ##     dayofweek
+
     ##   |                                                                              |.................                                                     |  24%
     ##   ordinary text without R code
     ## 
@@ -390,6 +503,11 @@ apply(reports, MARGIN = 1,
     ## 
     ##   |                                                                              |..........................                                            |  38%
     ## label: day-data-contingency-table
+
+    ## The following object is masked _by_ .GlobalEnv:
+    ## 
+    ##     dayofweek
+
     ##   |                                                                              |............................                                          |  41%
     ##   ordinary text without R code
     ## 
@@ -405,15 +523,12 @@ apply(reports, MARGIN = 1,
     ##   ordinary text without R code
     ## 
     ##   |                                                                              |......................................                                |  54%
-    ## label: dat-data-scatterplot (with options) 
-    ## List of 2
-    ##  $ message: logi FALSE
-    ##  $ warning: logi FALSE
+    ## label: dat-data-scatterplot
 
     ## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
 
     ##   |                                                                              |........................................                              |  57%
-    ##   ordinary text without R code
+    ##    inline R code fragments
     ## 
     ##   |                                                                              |..........................................                            |  59%
     ## label: regression-tree-final-model
@@ -435,6 +550,16 @@ apply(reports, MARGIN = 1,
     ## 
     ##   |                                                                              |.....................................................                 |  76%
     ## label: boosted-tree-final-model
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
     ##   |                                                                              |.......................................................               |  78%
     ##   ordinary text without R code
     ## 
@@ -461,11 +586,11 @@ apply(reports, MARGIN = 1,
 
     ## output file: AnalysisCode.knit.md
 
-    ## "C:/Program Files/RStudio/bin/pandoc/pandoc" +RTS -K512m -RTS AnalysisCode.utf8.md --to gfm --from markdown+autolink_bare_uris+tex_math_single_backslash --output WednesdayAnalysis.md --standalone --template "C:\Users\hyeon\Documents\R\win-library\4.0\rmarkdown\rmarkdown\templates\github_document\resources\default.md" 
+    ## "C:/Program Files/RStudio/bin/pandoc/pandoc" +RTS -K512m -RTS AnalysisCode.utf8.md --to gfm --from markdown+autolink_bare_uris+tex_math_single_backslash --output WednesdayAnalysis.md --standalone --table-of-contents --toc-depth 2 --template "C:\Users\hyeon\Documents\R\win-library\4.0\rmarkdown\rmarkdown\templates\github_document\resources\default.md" 
     ## "C:/Program Files/RStudio/bin/pandoc/pandoc" +RTS -K512m -RTS WednesdayAnalysis.md --to html4 --from gfm --output WednesdayAnalysis.html --standalone --self-contained --highlight-style pygments --template "C:\Users\hyeon\Documents\R\win-library\4.0\rmarkdown\rmarkdown\templates\github_document\resources\preview.html" --variable "github-markdown-css:C:\Users\hyeon\Documents\R\win-library\4.0\rmarkdown\rmarkdown\templates\github_document\resources\github.css" --email-obfuscation none --metadata pagetitle=PREVIEW
 
     ## 
-    ## Preview created: C:\Users\hyeon\AppData\Local\Temp\RtmpqAvZtx\preview-61082176dac.html
+    ## Preview created: C:\Users\hyeon\AppData\Local\Temp\RtmpqAvZtx\preview-20529614d0.html
 
     ## 
     ## Output created: WednesdayAnalysis.md
@@ -524,6 +649,11 @@ apply(reports, MARGIN = 1,
     ## 
     ##   |                                                                              |...............                                                       |  22%
     ## label: full-data-contingency-table
+
+    ## The following object is masked _by_ .GlobalEnv:
+    ## 
+    ##     dayofweek
+
     ##   |                                                                              |.................                                                     |  24%
     ##   ordinary text without R code
     ## 
@@ -541,6 +671,11 @@ apply(reports, MARGIN = 1,
     ## 
     ##   |                                                                              |..........................                                            |  38%
     ## label: day-data-contingency-table
+
+    ## The following object is masked _by_ .GlobalEnv:
+    ## 
+    ##     dayofweek
+
     ##   |                                                                              |............................                                          |  41%
     ##   ordinary text without R code
     ## 
@@ -556,15 +691,12 @@ apply(reports, MARGIN = 1,
     ##   ordinary text without R code
     ## 
     ##   |                                                                              |......................................                                |  54%
-    ## label: dat-data-scatterplot (with options) 
-    ## List of 2
-    ##  $ message: logi FALSE
-    ##  $ warning: logi FALSE
+    ## label: dat-data-scatterplot
 
     ## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
 
     ##   |                                                                              |........................................                              |  57%
-    ##   ordinary text without R code
+    ##    inline R code fragments
     ## 
     ##   |                                                                              |..........................................                            |  59%
     ## label: regression-tree-final-model
@@ -612,11 +744,11 @@ apply(reports, MARGIN = 1,
 
     ## output file: AnalysisCode.knit.md
 
-    ## "C:/Program Files/RStudio/bin/pandoc/pandoc" +RTS -K512m -RTS AnalysisCode.utf8.md --to gfm --from markdown+autolink_bare_uris+tex_math_single_backslash --output ThursdayAnalysis.md --standalone --template "C:\Users\hyeon\Documents\R\win-library\4.0\rmarkdown\rmarkdown\templates\github_document\resources\default.md" 
+    ## "C:/Program Files/RStudio/bin/pandoc/pandoc" +RTS -K512m -RTS AnalysisCode.utf8.md --to gfm --from markdown+autolink_bare_uris+tex_math_single_backslash --output ThursdayAnalysis.md --standalone --table-of-contents --toc-depth 2 --template "C:\Users\hyeon\Documents\R\win-library\4.0\rmarkdown\rmarkdown\templates\github_document\resources\default.md" 
     ## "C:/Program Files/RStudio/bin/pandoc/pandoc" +RTS -K512m -RTS ThursdayAnalysis.md --to html4 --from gfm --output ThursdayAnalysis.html --standalone --self-contained --highlight-style pygments --template "C:\Users\hyeon\Documents\R\win-library\4.0\rmarkdown\rmarkdown\templates\github_document\resources\preview.html" --variable "github-markdown-css:C:\Users\hyeon\Documents\R\win-library\4.0\rmarkdown\rmarkdown\templates\github_document\resources\github.css" --email-obfuscation none --metadata pagetitle=PREVIEW
 
     ## 
-    ## Preview created: C:\Users\hyeon\AppData\Local\Temp\RtmpqAvZtx\preview-61086cd1d6a.html
+    ## Preview created: C:\Users\hyeon\AppData\Local\Temp\RtmpqAvZtx\preview-205e6547.html
 
     ## 
     ## Output created: ThursdayAnalysis.md
@@ -675,6 +807,11 @@ apply(reports, MARGIN = 1,
     ## 
     ##   |                                                                              |...............                                                       |  22%
     ## label: full-data-contingency-table
+
+    ## The following object is masked _by_ .GlobalEnv:
+    ## 
+    ##     dayofweek
+
     ##   |                                                                              |.................                                                     |  24%
     ##   ordinary text without R code
     ## 
@@ -692,6 +829,11 @@ apply(reports, MARGIN = 1,
     ## 
     ##   |                                                                              |..........................                                            |  38%
     ## label: day-data-contingency-table
+
+    ## The following object is masked _by_ .GlobalEnv:
+    ## 
+    ##     dayofweek
+
     ##   |                                                                              |............................                                          |  41%
     ##   ordinary text without R code
     ## 
@@ -707,15 +849,12 @@ apply(reports, MARGIN = 1,
     ##   ordinary text without R code
     ## 
     ##   |                                                                              |......................................                                |  54%
-    ## label: dat-data-scatterplot (with options) 
-    ## List of 2
-    ##  $ message: logi FALSE
-    ##  $ warning: logi FALSE
+    ## label: dat-data-scatterplot
 
     ## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
 
     ##   |                                                                              |........................................                              |  57%
-    ##   ordinary text without R code
+    ##    inline R code fragments
     ## 
     ##   |                                                                              |..........................................                            |  59%
     ## label: regression-tree-final-model
@@ -737,6 +876,16 @@ apply(reports, MARGIN = 1,
     ## 
     ##   |                                                                              |.....................................................                 |  76%
     ## label: boosted-tree-final-model
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
     ##   |                                                                              |.......................................................               |  78%
     ##   ordinary text without R code
     ## 
@@ -763,11 +912,11 @@ apply(reports, MARGIN = 1,
 
     ## output file: AnalysisCode.knit.md
 
-    ## "C:/Program Files/RStudio/bin/pandoc/pandoc" +RTS -K512m -RTS AnalysisCode.utf8.md --to gfm --from markdown+autolink_bare_uris+tex_math_single_backslash --output FridayAnalysis.md --standalone --template "C:\Users\hyeon\Documents\R\win-library\4.0\rmarkdown\rmarkdown\templates\github_document\resources\default.md" 
+    ## "C:/Program Files/RStudio/bin/pandoc/pandoc" +RTS -K512m -RTS AnalysisCode.utf8.md --to gfm --from markdown+autolink_bare_uris+tex_math_single_backslash --output FridayAnalysis.md --standalone --table-of-contents --toc-depth 2 --template "C:\Users\hyeon\Documents\R\win-library\4.0\rmarkdown\rmarkdown\templates\github_document\resources\default.md" 
     ## "C:/Program Files/RStudio/bin/pandoc/pandoc" +RTS -K512m -RTS FridayAnalysis.md --to html4 --from gfm --output FridayAnalysis.html --standalone --self-contained --highlight-style pygments --template "C:\Users\hyeon\Documents\R\win-library\4.0\rmarkdown\rmarkdown\templates\github_document\resources\preview.html" --variable "github-markdown-css:C:\Users\hyeon\Documents\R\win-library\4.0\rmarkdown\rmarkdown\templates\github_document\resources\github.css" --email-obfuscation none --metadata pagetitle=PREVIEW
 
     ## 
-    ## Preview created: C:\Users\hyeon\AppData\Local\Temp\RtmpqAvZtx\preview-610875af3aee.html
+    ## Preview created: C:\Users\hyeon\AppData\Local\Temp\RtmpqAvZtx\preview-2077871027.html
 
     ## 
     ## Output created: FridayAnalysis.md
@@ -826,6 +975,11 @@ apply(reports, MARGIN = 1,
     ## 
     ##   |                                                                              |...............                                                       |  22%
     ## label: full-data-contingency-table
+
+    ## The following object is masked _by_ .GlobalEnv:
+    ## 
+    ##     dayofweek
+
     ##   |                                                                              |.................                                                     |  24%
     ##   ordinary text without R code
     ## 
@@ -843,6 +997,11 @@ apply(reports, MARGIN = 1,
     ## 
     ##   |                                                                              |..........................                                            |  38%
     ## label: day-data-contingency-table
+
+    ## The following object is masked _by_ .GlobalEnv:
+    ## 
+    ##     dayofweek
+
     ##   |                                                                              |............................                                          |  41%
     ##   ordinary text without R code
     ## 
@@ -858,15 +1017,12 @@ apply(reports, MARGIN = 1,
     ##   ordinary text without R code
     ## 
     ##   |                                                                              |......................................                                |  54%
-    ## label: dat-data-scatterplot (with options) 
-    ## List of 2
-    ##  $ message: logi FALSE
-    ##  $ warning: logi FALSE
+    ## label: dat-data-scatterplot
 
     ## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
 
     ##   |                                                                              |........................................                              |  57%
-    ##   ordinary text without R code
+    ##    inline R code fragments
     ## 
     ##   |                                                                              |..........................................                            |  59%
     ## label: regression-tree-final-model
@@ -888,6 +1044,100 @@ apply(reports, MARGIN = 1,
     ## 
     ##   |                                                                              |.....................................................                 |  76%
     ## label: boosted-tree-final-model
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
     ##   |                                                                              |.......................................................               |  78%
     ##   ordinary text without R code
     ## 
@@ -914,11 +1164,11 @@ apply(reports, MARGIN = 1,
 
     ## output file: AnalysisCode.knit.md
 
-    ## "C:/Program Files/RStudio/bin/pandoc/pandoc" +RTS -K512m -RTS AnalysisCode.utf8.md --to gfm --from markdown+autolink_bare_uris+tex_math_single_backslash --output SaturdayAnalysis.md --standalone --template "C:\Users\hyeon\Documents\R\win-library\4.0\rmarkdown\rmarkdown\templates\github_document\resources\default.md" 
+    ## "C:/Program Files/RStudio/bin/pandoc/pandoc" +RTS -K512m -RTS AnalysisCode.utf8.md --to gfm --from markdown+autolink_bare_uris+tex_math_single_backslash --output SaturdayAnalysis.md --standalone --table-of-contents --toc-depth 2 --template "C:\Users\hyeon\Documents\R\win-library\4.0\rmarkdown\rmarkdown\templates\github_document\resources\default.md" 
     ## "C:/Program Files/RStudio/bin/pandoc/pandoc" +RTS -K512m -RTS SaturdayAnalysis.md --to html4 --from gfm --output SaturdayAnalysis.html --standalone --self-contained --highlight-style pygments --template "C:\Users\hyeon\Documents\R\win-library\4.0\rmarkdown\rmarkdown\templates\github_document\resources\preview.html" --variable "github-markdown-css:C:\Users\hyeon\Documents\R\win-library\4.0\rmarkdown\rmarkdown\templates\github_document\resources\github.css" --email-obfuscation none --metadata pagetitle=PREVIEW
 
     ## 
-    ## Preview created: C:\Users\hyeon\AppData\Local\Temp\RtmpqAvZtx\preview-610810d67430.html
+    ## Preview created: C:\Users\hyeon\AppData\Local\Temp\RtmpqAvZtx\preview-2049983700.html
 
     ## 
     ## Output created: SaturdayAnalysis.md
@@ -977,6 +1227,11 @@ apply(reports, MARGIN = 1,
     ## 
     ##   |                                                                              |...............                                                       |  22%
     ## label: full-data-contingency-table
+
+    ## The following object is masked _by_ .GlobalEnv:
+    ## 
+    ##     dayofweek
+
     ##   |                                                                              |.................                                                     |  24%
     ##   ordinary text without R code
     ## 
@@ -994,6 +1249,11 @@ apply(reports, MARGIN = 1,
     ## 
     ##   |                                                                              |..........................                                            |  38%
     ## label: day-data-contingency-table
+
+    ## The following object is masked _by_ .GlobalEnv:
+    ## 
+    ##     dayofweek
+
     ##   |                                                                              |............................                                          |  41%
     ##   ordinary text without R code
     ## 
@@ -1009,15 +1269,12 @@ apply(reports, MARGIN = 1,
     ##   ordinary text without R code
     ## 
     ##   |                                                                              |......................................                                |  54%
-    ## label: dat-data-scatterplot (with options) 
-    ## List of 2
-    ##  $ message: logi FALSE
-    ##  $ warning: logi FALSE
+    ## label: dat-data-scatterplot
 
     ## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
 
     ##   |                                                                              |........................................                              |  57%
-    ##   ordinary text without R code
+    ##    inline R code fragments
     ## 
     ##   |                                                                              |..........................................                            |  59%
     ## label: regression-tree-final-model
@@ -1039,6 +1296,100 @@ apply(reports, MARGIN = 1,
     ## 
     ##   |                                                                              |.....................................................                 |  76%
     ## label: boosted-tree-final-model
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
+    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
+    ## "bernoulli", : variable 3: holiday has no variation.
+
     ##   |                                                                              |.......................................................               |  78%
     ##   ordinary text without R code
     ## 
@@ -1065,11 +1416,11 @@ apply(reports, MARGIN = 1,
 
     ## output file: AnalysisCode.knit.md
 
-    ## "C:/Program Files/RStudio/bin/pandoc/pandoc" +RTS -K512m -RTS AnalysisCode.utf8.md --to gfm --from markdown+autolink_bare_uris+tex_math_single_backslash --output SundayAnalysis.md --standalone --template "C:\Users\hyeon\Documents\R\win-library\4.0\rmarkdown\rmarkdown\templates\github_document\resources\default.md" 
+    ## "C:/Program Files/RStudio/bin/pandoc/pandoc" +RTS -K512m -RTS AnalysisCode.utf8.md --to gfm --from markdown+autolink_bare_uris+tex_math_single_backslash --output SundayAnalysis.md --standalone --table-of-contents --toc-depth 2 --template "C:\Users\hyeon\Documents\R\win-library\4.0\rmarkdown\rmarkdown\templates\github_document\resources\default.md" 
     ## "C:/Program Files/RStudio/bin/pandoc/pandoc" +RTS -K512m -RTS SundayAnalysis.md --to html4 --from gfm --output SundayAnalysis.html --standalone --self-contained --highlight-style pygments --template "C:\Users\hyeon\Documents\R\win-library\4.0\rmarkdown\rmarkdown\templates\github_document\resources\preview.html" --variable "github-markdown-css:C:\Users\hyeon\Documents\R\win-library\4.0\rmarkdown\rmarkdown\templates\github_document\resources\github.css" --email-obfuscation none --metadata pagetitle=PREVIEW
 
     ## 
-    ## Preview created: C:\Users\hyeon\AppData\Local\Temp\RtmpqAvZtx\preview-6108c51173.html
+    ## Preview created: C:\Users\hyeon\AppData\Local\Temp\RtmpqAvZtx\preview-204adf161b.html
 
     ## 
     ## Output created: SundayAnalysis.md

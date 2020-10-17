@@ -2,13 +2,16 @@
 title: "ST 558 Project 2"
 author: "Hannah Park"
 date: "10/15/2020"
-output: rmarkdown::github_document
+output: 
+  rmarkdown::github_document:
+    toc: true
+    toc_depth: 2
 params:
   dayofweek: "Monday"
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
 library(knitr)
 library(tidyverse)
 library(ggplot2)
@@ -235,7 +238,7 @@ grid.arrange(boxplot4, boxplot1, boxplot3, boxplot2)
 #### Figure 5. Quantitative variables: Scatterplots    
 Scatterplot of quantitative variables (Humidity, Average Temperature, and Wind Speed) are displayed. 
 
-```{r dat-data-scatterplot, message = FALSE, warning = FALSE}
+```{r dat-data-scatterplot}
 df.train %>%
   gather(avgTemp, hum, windspeed, key = "var", value = "value") %>%
   mutate(var = factor(var, levels = c("hum", "avgTemp", "windspeed")),
@@ -251,7 +254,7 @@ df.train %>%
                                       windspeed = "Wind Speed"))) 
 ```
 
-# Modeling  
+# Modeling - Day of Week: `r params$dayofweek`    
 Two models are fitted: a tree-based model chosen using leave one out cross validation (LOOCV) that is non-ensemble and a boosted tree model chosen using cross-validation (CV). For both models, the response variable is the **Count of Total Rental Bikes** (cnt), and the predictor variables are year (yr), month (mnth), holiday, weather (weathersit), average temperature (average of temp and atemp), humidity (hum), and wind speed (windspeed).    
 
 ## Tree-based Model  

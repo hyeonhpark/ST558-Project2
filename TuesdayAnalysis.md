@@ -3,6 +3,19 @@ ST 558 Project 2
 Hannah Park
 10/15/2020
 
+  - [Introduction](#introduction)
+  - [Data](#data)
+  - [Summarizations](#summarizations)
+      - [Full Data](#full-data)
+      - [Specific Day of the Week Data:
+        Tuesday](#specific-day-of-the-week-data-tuesday)
+  - [Modeling - Day of Week: Tuesday](#modeling---day-of-week-tuesday)
+      - [Tree-based Model](#tree-based-model)
+      - [Boosted Tree Model](#boosted-tree-model)
+  - [Model Comparison](#model-comparison)
+      - [Table 5. Comparison of root MSE values between
+        models](#table-5.-comparison-of-root-mse-values-between-models)
+
 # Introduction
 
 Bike sharing systems is a service in which bicycles are made available
@@ -148,13 +161,6 @@ df.tbl <- apply_labels(df.bike,
                        windspeed = "Wind Speed",
                        cnt = "Count of Total Rental Bikes")
 attach(df.tbl)
-```
-
-    ## The following object is masked _by_ .GlobalEnv:
-    ## 
-    ##     dayofweek
-
-``` r
 cro_cases(list(holiday, weathersit), df.tbl$dayofweek,
           total_row_position = "none")
 ```
@@ -624,13 +630,6 @@ df.tbl.train <- apply_labels(df.train,
                              cnt = "Count of Total Rental Bikes")
                        
 attach(df.tbl.train)
-```
-
-    ## The following object is masked _by_ .GlobalEnv:
-    ## 
-    ##     dayofweek
-
-``` r
 cro_cases(list(yr, holiday,weathersit), mnth,
           total_row_position = "none")
 ```
@@ -2561,7 +2560,7 @@ df.train %>%
 
 ![](TuesdayAnalysis_files/figure-gfm/dat-data-scatterplot-1.png)<!-- -->
 
-# Modeling
+# Modeling - Day of Week: Tuesday
 
 Two models are fitted: a tree-based model chosen using leave one out
 cross validation (LOOCV) that is non-ensemble and a boosted tree model
@@ -2647,99 +2646,6 @@ fit.boost <- train(cnt ~ yr + mnth + holiday + weathersit + avgTemp + hum + wind
                    trControl = trainControl(method = "cv", number = 10),
                    verbose = FALSE)
 ```
-
-    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
-    ## "bernoulli", : variable 3: holiday has no variation.
-
-    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
-    ## "bernoulli", : variable 3: holiday has no variation.
-
-    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
-    ## "bernoulli", : variable 3: holiday has no variation.
-
-    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
-    ## "bernoulli", : variable 3: holiday has no variation.
-
-    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
-    ## "bernoulli", : variable 3: holiday has no variation.
-
-    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
-    ## "bernoulli", : variable 3: holiday has no variation.
-
-    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
-    ## "bernoulli", : variable 3: holiday has no variation.
-
-    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
-    ## "bernoulli", : variable 3: holiday has no variation.
-
-    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
-    ## "bernoulli", : variable 3: holiday has no variation.
-
-    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
-    ## "bernoulli", : variable 3: holiday has no variation.
-
-    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
-    ## "bernoulli", : variable 3: holiday has no variation.
-
-    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
-    ## "bernoulli", : variable 3: holiday has no variation.
-
-    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
-    ## "bernoulli", : variable 3: holiday has no variation.
-
-    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
-    ## "bernoulli", : variable 3: holiday has no variation.
-
-    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
-    ## "bernoulli", : variable 3: holiday has no variation.
-
-    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
-    ## "bernoulli", : variable 3: holiday has no variation.
-
-    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
-    ## "bernoulli", : variable 3: holiday has no variation.
-
-    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
-    ## "bernoulli", : variable 3: holiday has no variation.
-
-    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
-    ## "bernoulli", : variable 3: holiday has no variation.
-
-    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
-    ## "bernoulli", : variable 3: holiday has no variation.
-
-    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
-    ## "bernoulli", : variable 3: holiday has no variation.
-
-    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
-    ## "bernoulli", : variable 3: holiday has no variation.
-
-    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
-    ## "bernoulli", : variable 3: holiday has no variation.
-
-    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
-    ## "bernoulli", : variable 3: holiday has no variation.
-
-    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
-    ## "bernoulli", : variable 3: holiday has no variation.
-
-    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
-    ## "bernoulli", : variable 3: holiday has no variation.
-
-    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
-    ## "bernoulli", : variable 3: holiday has no variation.
-
-    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
-    ## "bernoulli", : variable 3: holiday has no variation.
-
-    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
-    ## "bernoulli", : variable 3: holiday has no variation.
-
-    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
-    ## "bernoulli", : variable 3: holiday has no variation.
-
-    ## Warning in (function (x, y, offset = NULL, misc = NULL, distribution =
-    ## "bernoulli", : variable 3: holiday has no variation.
 
 ### Full result
 
