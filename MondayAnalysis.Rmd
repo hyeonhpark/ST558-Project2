@@ -273,7 +273,7 @@ fit.tree$bestTune
 
 #### Predictions on the test set  
 ```{r}
-treePred <- predict(treeFit, newdata = df.test)
+treePred <- predict(fit.tree, newdata = df.test)
 treeRMSE <- sqrt(mean((treePred-df.test$cnt)^2))
 ```
 
@@ -298,7 +298,7 @@ fit.boost$bestTune
 
 #### Predictions on the test set  
 ```{r}
-boostPred <- predict(boostFit, newdata = df.test)
+boostPred <- predict(fit.boost, newdata = df.test)
 boostRMSE <- sqrt(mean((boostPred-df.test$cnt)^2))
 ```
 

@@ -58,8 +58,8 @@ the count of total rental bikes (cnt). Some variables from the original
 data set were removed/transformed from the models to avoid
 multicollinearity. Variables season and month (mnth), as well as
 variables temp and atemp, were highly correlated with each other
-according to the [correlation plot](correlation-plot-1.png). Variable
-month (mnth) was chosen over variable season to minimize the loss of
+according to the correlation plot (Figure 1 below). Variable month
+(mnth) was chosen over variable season to minimize the loss of
 information and also because month was more highly correlated with the
 response variable (cnt) than season. Variables temp and atemp were
 combined and their average was used in the models. Variables day of the
@@ -2561,14 +2561,39 @@ df.train %>%
 
 # Modeling
 
+Two models are fitted: a tree-based model chosen using leave one out
+cross validation (LOOCV) that is non-ensemble and a boosted tree model
+chosen using cross-validation (CV). For both models, the response
+variable is the **Count of Total Rental Bikes** (cnt), and the predictor
+variables are year (yr), month (mnth), holiday, weather (weathersit),
+average temperature (average of temp and atemp), humidity (hum), and
+wind speed (windspeed).
+
 ## Tree-based Model
 
+A regression tree is fitted using recursive binary splitting to predict
+the continous response cnt. For every possible value of each predictor,
+the optimal value that minimizes the Residual Sum of Squares (RSS) is
+found, and the predictor and its optimal value with the smallest RSS is
+chosen to split the predictor space into two. This process is repeated
+to further split the predictor space into several regions (nodes of the
+tree). To avoid overfitting the data, LOOCV is used to prune back the
+tree and choose the right number of nodes that decreases variance but
+improves prediction.
+
+#### Model fit
+
 ``` r
-treeFit <- train(cnt ~ yr + mnth + holiday + weathersit + avgTemp + hum + windspeed, data = df.train,
+fit.tree <- train(cnt ~ yr + mnth + holiday + weathersit + avgTemp + hum + windspeed,
+                  data = df.train,
                   method = "rpart",
-                  trControl = trainControl(method = "LOOCV")
-                  )
-treeFit$results
+                  trControl = trainControl(method = "LOOCV"))
+```
+
+#### Final chosen model
+
+``` r
+fit.tree$results
 ```
 
     ##           cp     RMSE    Rsquared      MAE
@@ -2577,44 +2602,90 @@ treeFit$results
     ## 3 0.45969184 1959.403 0.007081118 1770.250
 
 ``` r
-treePred <- predict(treeFit, newdata = df.test)
+fancyRpartPlot(fit.tree$finalModel)
+```
+
+![](MondayAnalysis_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
+
+``` r
+fit.tree$bestTune
+```
+
+    ##           cp
+    ## 1 0.07039248
+
+#### Predictions on the test set
+
+``` r
+treePred <- predict(fit.tree, newdata = df.test)
 treeRMSE <- sqrt(mean((treePred-df.test$cnt)^2))
 ```
 
 ## Boosted Tree Model
 
+In a boosted tree model, tree are added subsequentially, resulting in
+slow training of trees that helps prevent overfitting of the data.
+Boosted tree model sequentially combines trees: each new tree fits to
+the residuals from the previous step. There are three tuning parameters
+associated with boosting: \(\lambda\) - a shrinkage parameter that slows
+the fitting process, *B* - number of boosting iterations, and *d* -
+maximum tree depth. Cross validation (CV) is used in our model to select
+the tuning parameters.
+
+#### Model fit
+
 ``` r
-boostFit <- train(cnt ~ yr + mnth + holiday + weathersit + avgTemp + hum + windspeed, data = df.train,
-                  method = "gbm",
-                  trControl = trainControl(method = "cv", number = 10),
-                  preProcess = c("center", "scale"),
-                  verbose = FALSE)
-boostFit$results
+fit.boost <- train(cnt ~ yr + mnth + holiday + weathersit + avgTemp + hum + windspeed, 
+                   data = df.train,
+                   method = "gbm",
+                   trControl = trainControl(method = "cv", number = 10),
+                   verbose = FALSE)
+```
+
+#### Final chosen model
+
+``` r
+fit.boost$results
 ```
 
     ##   shrinkage interaction.depth n.minobsinnode n.trees     RMSE  Rsquared
-    ## 1       0.1                 1             10      50 822.8230 0.7828556
-    ## 4       0.1                 2             10      50 753.8376 0.8074854
+    ## 1       0.1                 1             10      50 822.7659 0.7826529
+    ## 4       0.1                 2             10      50 755.0458 0.8068934
     ## 7       0.1                 3             10      50 775.0523 0.7986783
-    ## 2       0.1                 1             10     100 771.6989 0.8038712
-    ## 5       0.1                 2             10     100 742.0641 0.8167548
-    ## 8       0.1                 3             10     100 741.5423 0.8181931
-    ## 3       0.1                 1             10     150 751.0869 0.8093963
-    ## 6       0.1                 2             10     150 757.9466 0.8151539
-    ## 9       0.1                 3             10     150 748.8548 0.8189707
+    ## 2       0.1                 1             10     100 770.0274 0.8036290
+    ## 5       0.1                 2             10     100 745.4788 0.8152745
+    ## 8       0.1                 3             10     100 741.6463 0.8181918
+    ## 3       0.1                 1             10     150 749.4813 0.8093348
+    ## 6       0.1                 2             10     150 762.7653 0.8135532
+    ## 9       0.1                 3             10     150 749.2553 0.8189545
     ##        MAE   RMSESD RsquaredSD    MAESD
-    ## 1 679.3042 288.8085  0.1760329 189.3959
-    ## 4 591.9704 309.5414  0.1600545 193.5577
+    ## 1 679.8976 288.8993  0.1758262 188.5489
+    ## 4 594.1796 309.1696  0.1597330 191.6425
     ## 7 632.5262 280.1477  0.1544765 169.4023
-    ## 2 617.4081 274.7145  0.1482330 172.1245
-    ## 5 586.0333 273.3767  0.1298599 161.2001
-    ## 8 587.1008 246.1741  0.1247739 139.4208
-    ## 3 609.0091 275.9815  0.1403147 180.5428
-    ## 6 592.2217 258.7182  0.1242272 148.0944
-    ## 9 588.1773 249.4318  0.1269766 142.1458
+    ## 2 612.7792 275.7530  0.1479579 177.8962
+    ## 5 587.7916 273.1966  0.1289282 160.2560
+    ## 8 587.4932 246.0611  0.1247724 138.7681
+    ## 3 605.5542 278.7460  0.1402884 185.2457
+    ## 6 595.4793 258.4645  0.1230508 147.5624
+    ## 9 588.8263 249.0724  0.1269573 141.1556
 
 ``` r
-boostPred <- predict(boostFit, newdata = df.test)
+plot(fit.boost)
+```
+
+![](MondayAnalysis_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
+
+``` r
+fit.boost$bestTune
+```
+
+    ##   n.trees interaction.depth shrinkage n.minobsinnode
+    ## 8     100                 3       0.1             10
+
+#### Predictions on the test set
+
+``` r
+boostPred <- predict(fit.boost, newdata = df.test)
 boostRMSE <- sqrt(mean((boostPred-df.test$cnt)^2))
 ```
 
