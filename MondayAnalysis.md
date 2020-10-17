@@ -2581,7 +2581,7 @@ tree). To avoid overfitting the data, LOOCV is used to prune back the
 tree and choose the right number of nodes that decreases variance but
 improves prediction.
 
-#### Model fit
+### Model fit
 
 ``` r
 fit.tree <- train(cnt ~ yr + mnth + holiday + weathersit + avgTemp + hum + windspeed,
@@ -2590,7 +2590,10 @@ fit.tree <- train(cnt ~ yr + mnth + holiday + weathersit + avgTemp + hum + winds
                   trControl = trainControl(method = "LOOCV"))
 ```
 
-#### Final chosen model
+#### Full result
+
+The results of the regression tree model and plot of the decision tree
+are displayed below.
 
 ``` r
 fit.tree$results
@@ -2602,23 +2605,23 @@ fit.tree$results
     ## 3 0.45969184 1959.403 0.007081118 1770.250
 
 ``` r
-fancyRpartPlot(fit.tree$finalModel)
+fancyRpartPlot(fit.tree$finalModel,
+               sub = "")
 ```
 
-![](MondayAnalysis_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
+![](MondayAnalysis_files/figure-gfm/regression-tree-final-model-results-1.png)<!-- -->
 
-``` r
-fit.tree$bestTune
-```
+### Final chosen model
 
-    ##           cp
-    ## 1 0.07039248
+Model with the smallest Cp value is chosen as the final regression tree
+model, and for our training data, the final model has a Cp value of
+0.0703925.
 
 #### Predictions on the test set
 
 ``` r
-treePred <- predict(fit.tree, newdata = df.test)
-treeRMSE <- sqrt(mean((treePred-df.test$cnt)^2))
+pred.tree <- predict(fit.tree, newdata = df.test)
+RMSE.tree <- sqrt(mean((pred.tree-df.test$cnt)^2))
 ```
 
 ## Boosted Tree Model
@@ -2632,7 +2635,7 @@ the fitting process, *B* - number of boosting iterations, and *d* -
 maximum tree depth. Cross validation (CV) is used in our model to select
 the tuning parameters.
 
-#### Model fit
+### Model fit
 
 ``` r
 fit.boost <- train(cnt ~ yr + mnth + holiday + weathersit + avgTemp + hum + windspeed, 
@@ -2642,65 +2645,82 @@ fit.boost <- train(cnt ~ yr + mnth + holiday + weathersit + avgTemp + hum + wind
                    verbose = FALSE)
 ```
 
-#### Final chosen model
+#### Full result
+
+The result of the boosted tree model, displaying the different
+combinations of tuning parameters and their respective RMSE, and plot of
+the result are provided below.
 
 ``` r
-fit.boost$results
+kable(fit.boost$results[c(1,4,2,5)],
+      col.names = c("Shrinkage",
+                    "Boosting Iterations",
+                    "Maximum Tree Depth",
+                    "RMSE"),
+      row.names = FALSE)
 ```
 
-    ##   shrinkage interaction.depth n.minobsinnode n.trees     RMSE  Rsquared
-    ## 1       0.1                 1             10      50 822.7659 0.7826529
-    ## 4       0.1                 2             10      50 755.0458 0.8068934
-    ## 7       0.1                 3             10      50 775.0523 0.7986783
-    ## 2       0.1                 1             10     100 770.0274 0.8036290
-    ## 5       0.1                 2             10     100 745.4788 0.8152745
-    ## 8       0.1                 3             10     100 741.6463 0.8181918
-    ## 3       0.1                 1             10     150 749.4813 0.8093348
-    ## 6       0.1                 2             10     150 762.7653 0.8135532
-    ## 9       0.1                 3             10     150 749.2553 0.8189545
-    ##        MAE   RMSESD RsquaredSD    MAESD
-    ## 1 679.8976 288.8993  0.1758262 188.5489
-    ## 4 594.1796 309.1696  0.1597330 191.6425
-    ## 7 632.5262 280.1477  0.1544765 169.4023
-    ## 2 612.7792 275.7530  0.1479579 177.8962
-    ## 5 587.7916 273.1966  0.1289282 160.2560
-    ## 8 587.4932 246.0611  0.1247724 138.7681
-    ## 3 605.5542 278.7460  0.1402884 185.2457
-    ## 6 595.4793 258.4645  0.1230508 147.5624
-    ## 9 588.8263 249.0724  0.1269573 141.1556
+| Shrinkage | Boosting Iterations | Maximum Tree Depth |     RMSE |
+| --------: | ------------------: | -----------------: | -------: |
+|       0.1 |                  50 |                  1 | 822.7659 |
+|       0.1 |                  50 |                  2 | 755.0458 |
+|       0.1 |                  50 |                  3 | 775.0523 |
+|       0.1 |                 100 |                  1 | 770.0274 |
+|       0.1 |                 100 |                  2 | 745.4788 |
+|       0.1 |                 100 |                  3 | 741.6463 |
+|       0.1 |                 150 |                  1 | 749.4813 |
+|       0.1 |                 150 |                  2 | 762.7653 |
+|       0.1 |                 150 |                  3 | 749.2553 |
 
 ``` r
 plot(fit.boost)
 ```
 
-![](MondayAnalysis_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
+![](MondayAnalysis_files/figure-gfm/boosted-tree-final-model-results-1.png)<!-- -->
+
+### Final chosen model
+
+Model with the smallest RMSE value is chosen as the final boosted tree
+model. For our training data, model with the tuning parameters provided
+in Table 4 is chosen via cross validation method.
+
+#### Table 4. Values of tuning parameters from the final boosted tree model
 
 ``` r
-fit.boost$bestTune
+kable(fit.boost$bestTune[1:3],
+      col.names = c("Shrinkage",
+                    "Boosting Iterations",
+                    "Maximum Tree Depth"),
+      row.names = FALSE)
 ```
 
-    ##   n.trees interaction.depth shrinkage n.minobsinnode
-    ## 8     100                 3       0.1             10
+| Shrinkage | Boosting Iterations | Maximum Tree Depth |
+| --------: | ------------------: | -----------------: |
+|       100 |                   3 |                0.1 |
 
 #### Predictions on the test set
 
 ``` r
-boostPred <- predict(fit.boost, newdata = df.test)
-boostRMSE <- sqrt(mean((boostPred-df.test$cnt)^2))
+pred.boost <- predict(fit.boost, newdata = df.test)
+RMSE.boost <- sqrt(mean((pred.boost-df.test$cnt)^2))
 ```
 
 # Model Comparison
 
+The two final models chosen based on LOOCV (regression tree) and CV
+(boosted tree) can be compared with their respective RMSE value. The
+boosted tree model is expected to perform better, and thus have a
+smaller RMSE value, since boosted tree models are generally better at
+prediction than non-ensemble, single tree models (regression tree).
+
+#### Table 5. Comparison of root MSE values between models
+
 ``` r
-tbl.rmse <- rbind.data.frame("tree" = treeRMSE, "boost" = boostRMSE)
-colnames(tbl.rmse) <- "RMSE"
-rownames(tbl.rmse) <- c("Reg. Tree", "Boost Tree")
-kable(tbl.rmse, caption = "Comparison of Models' RMSE")
+kable(c("Regression Tree" = RMSE.tree, "Boosted Tree" = RMSE.boost),
+      col.names = "RMSE")
 ```
 
-|            |     RMSE |
-| ---------- | -------: |
-| Reg. Tree  | 1423.966 |
-| Boost Tree | 1029.307 |
-
-Comparison of Models’ RMSE
+|                 |     RMSE |
+| --------------- | -------: |
+| Regression Tree | 1423.966 |
+| Boosted Tree    | 1029.307 |
