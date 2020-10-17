@@ -148,7 +148,7 @@ df.tbl <- apply_labels(df.bike,
                        windspeed = "Wind Speed",
                        cnt = "Count of Total Rental Bikes")
 attach(df.tbl)
-cro_cases(list(holiday, weathersit), dayofweek,
+cro_cases(list(holiday, weathersit), df.tbl$dayofweek,
           total_row_position = "none")
 ```
 

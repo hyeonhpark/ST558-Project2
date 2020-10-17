@@ -1,8 +1,8 @@
 ---
-title: "README"
+title: "ST 558 Project 2"
 author: "Hannah Park"
-date: "10/16/2020"
-output: html_document
+date: "10/15/2020"
+output: rmarkdown::github_document
 ---
 
 ```{r setup, include=FALSE}
@@ -10,11 +10,12 @@ knitr::opts_chunk$set(echo = TRUE)
 library(rmarkdown)
 ```
 
+## Code for Automation  
 ```{r}
 dayofweek <- c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")
 output_file <- paste0(dayofweek, "Analysis", ".md")
 params <- lapply(dayofweek, FUN = function(x){list(dayofweek = x)})
-reports <- tibble(output_file, params)
+reports <- tidyr::tibble(output_file, params)
 
 apply(reports, MARGIN = 1, 
       FUN = function(x){render(input = "AnalysisCode.Rmd",
