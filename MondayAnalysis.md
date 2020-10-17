@@ -2596,13 +2596,15 @@ The results of the regression tree model and plot of the decision tree
 are displayed below.
 
 ``` r
-fit.tree$results
+kable(fit.tree$results,
+      row.names = FALSE)
 ```
 
-    ##           cp     RMSE    Rsquared      MAE
-    ## 1 0.07039248 1280.707 0.471340268 1002.023
-    ## 2 0.17230882 1406.555 0.359472345 1243.783
-    ## 3 0.45969184 1959.403 0.007081118 1770.250
+|        cp |     RMSE |  Rsquared |      MAE |
+| --------: | -------: | --------: | -------: |
+| 0.0703925 | 1280.707 | 0.4713403 | 1002.023 |
+| 0.1723088 | 1406.555 | 0.3594723 | 1243.783 |
+| 0.4596918 | 1959.403 | 0.0070811 | 1770.250 |
 
 ``` r
 fancyRpartPlot(fit.tree$finalModel,

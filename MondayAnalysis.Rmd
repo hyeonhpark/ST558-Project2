@@ -268,7 +268,8 @@ fit.tree <- train(cnt ~ yr + mnth + holiday + weathersit + avgTemp + hum + winds
 The results of the regression tree model and plot of the decision tree are displayed below.  
 
 ```{r regression-tree-final-model-results}
-fit.tree$results
+kable(fit.tree$results,
+      row.names = FALSE)
 fancyRpartPlot(fit.tree$finalModel,
                sub = "")
 ```
