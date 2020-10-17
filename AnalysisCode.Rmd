@@ -50,7 +50,7 @@ The original data set is related to the two-year historical log corresponding to
 A tree-based model chosen using leave one out cross validation(LOOCV) and a boosted tree model chosen using cross-validation are used to model the count of total rental bikes (cnt). Some variables from the original data set were removed/transformed from the models to avoid multicollinearity. Variables season and month (mnth), as well as variables temp and atemp, were highly correlated with each other according to the correlation plot (Figure 1 below). Variable month (mnth) was chosen over variable season to minimize the loss of information and also because month was more highly correlated with the response variable (cnt) than season. Variables temp and atemp were combined and their average was used in the models. Variables day of the week (weekday) and working day were removed from the models due to their irrelevance. Thus, the predictor variables used in the models are year (yr), month (mnth), holiday, weather (weathersit), average temperature (average of temp and atemp), humidity (hum), and wind speed (windspeed). 
 
 # Data  
-```{r, message = FALSE, warning = FALSE}
+```{r data, message = FALSE, warning = FALSE}
 # Read in data
 url <- "https://archive.ics.uci.edu/ml/machine-learning-databases/00275/Bike-Sharing-Dataset.zip"
 download.file(url, "Bike-Sharing-Dataset.zip")
