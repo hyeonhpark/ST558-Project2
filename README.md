@@ -13,7 +13,7 @@ This repository was created to keep track of my work related to Project 2 for ST
 [Sunday is available here](SundayAnalysis.md)  
 
 ## Required Packages   
-`knitr`
+`knitr` - Generate report.  
 `tidyverse` - Data manipulation.  
 `ggplot2` - Creating exploratory plots.  
 `corrplot` - Visualizing correlation between variables.  
