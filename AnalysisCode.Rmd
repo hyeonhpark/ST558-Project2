@@ -111,7 +111,14 @@ df.tbl <- apply_labels(df.bike,
                                       "Moderate" = 2,
                                       "Bad" = 3,
                                       "Extreme" = 4),
-                       dayofweek = "Day of Week",
+                       weekday = "Day of Week",
+                       weekday = c("Sunday" = 0,
+                                   "Monday" = 1,
+                                   "Tuesday" = 2,
+                                   "Wednesday" = 3,
+                                   "Thursday" = 4,
+                                   "Friday" = 5,
+                                   "Saturday" = 6),
                        yr = "Year",
                        mnth = "Month",
                        avgTemp = "Average Temperature",
@@ -119,7 +126,7 @@ df.tbl <- apply_labels(df.bike,
                        windspeed = "Wind Speed",
                        cnt = "Count of Total Rental Bikes")
 attach(df.tbl)
-cro_cases(list(holiday, weathersit), df.tbl$dayofweek,
+cro_cases(list(holiday, weathersit), df.tbl$weekday,
           total_row_position = "none")
 detach(df.tbl)
 ```

@@ -170,7 +170,7 @@ apply(reports, MARGIN = 1,
     ## "C:/Program Files/RStudio/bin/pandoc/pandoc" +RTS -K512m -RTS MondayAnalysis.md --to html4 --from gfm --output MondayAnalysis.html --standalone --self-contained --highlight-style pygments --template "C:\Users\hyeon\Documents\R\win-library\4.0\rmarkdown\rmarkdown\templates\github_document\resources\preview.html" --variable "github-markdown-css:C:\Users\hyeon\Documents\R\win-library\4.0\rmarkdown\rmarkdown\templates\github_document\resources\github.css" --email-obfuscation none --metadata pagetitle=PREVIEW
 
     ## 
-    ## Preview created: C:\Users\hyeon\AppData\Local\Temp\RtmpicTliO\preview-4ae047167223.html
+    ## Preview created: C:\Users\hyeon\AppData\Local\Temp\RtmpicTliO\preview-5a2c124562a9.html
 
     ## 
     ## Output created: MondayAnalysis.md
@@ -422,7 +422,7 @@ apply(reports, MARGIN = 1,
     ## "C:/Program Files/RStudio/bin/pandoc/pandoc" +RTS -K512m -RTS TuesdayAnalysis.md --to html4 --from gfm --output TuesdayAnalysis.html --standalone --self-contained --highlight-style pygments --template "C:\Users\hyeon\Documents\R\win-library\4.0\rmarkdown\rmarkdown\templates\github_document\resources\preview.html" --variable "github-markdown-css:C:\Users\hyeon\Documents\R\win-library\4.0\rmarkdown\rmarkdown\templates\github_document\resources\github.css" --email-obfuscation none --metadata pagetitle=PREVIEW
 
     ## 
-    ## Preview created: C:\Users\hyeon\AppData\Local\Temp\RtmpicTliO\preview-4ae06ca03692.html
+    ## Preview created: C:\Users\hyeon\AppData\Local\Temp\RtmpicTliO\preview-5a2c4b184944.html
 
     ## 
     ## Output created: TuesdayAnalysis.md
@@ -590,7 +590,7 @@ apply(reports, MARGIN = 1,
     ## "C:/Program Files/RStudio/bin/pandoc/pandoc" +RTS -K512m -RTS WednesdayAnalysis.md --to html4 --from gfm --output WednesdayAnalysis.html --standalone --self-contained --highlight-style pygments --template "C:\Users\hyeon\Documents\R\win-library\4.0\rmarkdown\rmarkdown\templates\github_document\resources\preview.html" --variable "github-markdown-css:C:\Users\hyeon\Documents\R\win-library\4.0\rmarkdown\rmarkdown\templates\github_document\resources\github.css" --email-obfuscation none --metadata pagetitle=PREVIEW
 
     ## 
-    ## Preview created: C:\Users\hyeon\AppData\Local\Temp\RtmpicTliO\preview-4ae05aa4192.html
+    ## Preview created: C:\Users\hyeon\AppData\Local\Temp\RtmpicTliO\preview-5a2c7c933890.html
 
     ## 
     ## Output created: WednesdayAnalysis.md
@@ -748,7 +748,7 @@ apply(reports, MARGIN = 1,
     ## "C:/Program Files/RStudio/bin/pandoc/pandoc" +RTS -K512m -RTS ThursdayAnalysis.md --to html4 --from gfm --output ThursdayAnalysis.html --standalone --self-contained --highlight-style pygments --template "C:\Users\hyeon\Documents\R\win-library\4.0\rmarkdown\rmarkdown\templates\github_document\resources\preview.html" --variable "github-markdown-css:C:\Users\hyeon\Documents\R\win-library\4.0\rmarkdown\rmarkdown\templates\github_document\resources\github.css" --email-obfuscation none --metadata pagetitle=PREVIEW
 
     ## 
-    ## Preview created: C:\Users\hyeon\AppData\Local\Temp\RtmpicTliO\preview-4ae075836eac.html
+    ## Preview created: C:\Users\hyeon\AppData\Local\Temp\RtmpicTliO\preview-5a2c1fd9b7b.html
 
     ## 
     ## Output created: ThursdayAnalysis.md
@@ -916,7 +916,7 @@ apply(reports, MARGIN = 1,
     ## "C:/Program Files/RStudio/bin/pandoc/pandoc" +RTS -K512m -RTS FridayAnalysis.md --to html4 --from gfm --output FridayAnalysis.html --standalone --self-contained --highlight-style pygments --template "C:\Users\hyeon\Documents\R\win-library\4.0\rmarkdown\rmarkdown\templates\github_document\resources\preview.html" --variable "github-markdown-css:C:\Users\hyeon\Documents\R\win-library\4.0\rmarkdown\rmarkdown\templates\github_document\resources\github.css" --email-obfuscation none --metadata pagetitle=PREVIEW
 
     ## 
-    ## Preview created: C:\Users\hyeon\AppData\Local\Temp\RtmpicTliO\preview-4ae02d42f4e.html
+    ## Preview created: C:\Users\hyeon\AppData\Local\Temp\RtmpicTliO\preview-5a2c7dc33cfb.html
 
     ## 
     ## Output created: FridayAnalysis.md
@@ -1168,7 +1168,7 @@ apply(reports, MARGIN = 1,
     ## "C:/Program Files/RStudio/bin/pandoc/pandoc" +RTS -K512m -RTS SaturdayAnalysis.md --to html4 --from gfm --output SaturdayAnalysis.html --standalone --self-contained --highlight-style pygments --template "C:\Users\hyeon\Documents\R\win-library\4.0\rmarkdown\rmarkdown\templates\github_document\resources\preview.html" --variable "github-markdown-css:C:\Users\hyeon\Documents\R\win-library\4.0\rmarkdown\rmarkdown\templates\github_document\resources\github.css" --email-obfuscation none --metadata pagetitle=PREVIEW
 
     ## 
-    ## Preview created: C:\Users\hyeon\AppData\Local\Temp\RtmpicTliO\preview-4ae0277874b3.html
+    ## Preview created: C:\Users\hyeon\AppData\Local\Temp\RtmpicTliO\preview-5a2c418e61ac.html
 
     ## 
     ## Output created: SaturdayAnalysis.md
@@ -1420,7 +1420,7 @@ apply(reports, MARGIN = 1,
     ## "C:/Program Files/RStudio/bin/pandoc/pandoc" +RTS -K512m -RTS SundayAnalysis.md --to html4 --from gfm --output SundayAnalysis.html --standalone --self-contained --highlight-style pygments --template "C:\Users\hyeon\Documents\R\win-library\4.0\rmarkdown\rmarkdown\templates\github_document\resources\preview.html" --variable "github-markdown-css:C:\Users\hyeon\Documents\R\win-library\4.0\rmarkdown\rmarkdown\templates\github_document\resources\github.css" --email-obfuscation none --metadata pagetitle=PREVIEW
 
     ## 
-    ## Preview created: C:\Users\hyeon\AppData\Local\Temp\RtmpicTliO\preview-4ae039195d7d.html
+    ## Preview created: C:\Users\hyeon\AppData\Local\Temp\RtmpicTliO\preview-5a2c46bf29ac.html
 
     ## 
     ## Output created: SundayAnalysis.md

@@ -153,7 +153,14 @@ df.tbl <- apply_labels(df.bike,
                                       "Moderate" = 2,
                                       "Bad" = 3,
                                       "Extreme" = 4),
-                       dayofweek = "Day of Week",
+                       weekday = "Day of Week",
+                       weekday = c("Sunday" = 0,
+                                   "Monday" = 1,
+                                   "Tuesday" = 2,
+                                   "Wednesday" = 3,
+                                   "Thursday" = 4,
+                                   "Friday" = 5,
+                                   "Saturday" = 6),
                        yr = "Year",
                        mnth = "Month",
                        avgTemp = "Average Temperature",
@@ -161,7 +168,7 @@ df.tbl <- apply_labels(df.bike,
                        windspeed = "Wind Speed",
                        cnt = "Count of Total Rental Bikes")
 attach(df.tbl)
-cro_cases(list(holiday, weathersit), df.tbl$dayofweek,
+cro_cases(list(holiday, weathersit), df.tbl$weekday,
           total_row_position = "none")
 ```
 
@@ -191,31 +198,13 @@ cro_cases(list(holiday, weathersit), df.tbl$dayofweek,
 
 <th style="font-weight: 900; border-bottom: 1px solid grey; text-align: center;">
 
- Friday 
-
-</th>
-
-<th style="font-weight: 900; border-bottom: 1px solid grey; text-align: center;">
-
- Monday 
-
-</th>
-
-<th style="font-weight: 900; border-bottom: 1px solid grey; text-align: center;">
-
- Saturday 
-
-</th>
-
-<th style="font-weight: 900; border-bottom: 1px solid grey; text-align: center;">
-
  Sunday 
 
 </th>
 
 <th style="font-weight: 900; border-bottom: 1px solid grey; text-align: center;">
 
- Thursday 
+ Monday 
 
 </th>
 
@@ -228,6 +217,24 @@ cro_cases(list(holiday, weathersit), df.tbl$dayofweek,
 <th style="font-weight: 900; border-bottom: 1px solid grey; text-align: center;">
 
  Wednesday 
+
+</th>
+
+<th style="font-weight: 900; border-bottom: 1px solid grey; text-align: center;">
+
+ Thursday 
+
+</th>
+
+<th style="font-weight: 900; border-bottom: 1px solid grey; text-align: center;">
+
+ Friday 
+
+</th>
+
+<th style="font-weight: 900; border-bottom: 1px solid grey; text-align: center;">
+
+ Saturday 
 
 </th>
 
@@ -257,7 +264,7 @@ cro_cases(list(holiday, weathersit), df.tbl$dayofweek,
 
 <td style="text-align: right;">
 
-102
+105
 
 </td>
 
@@ -269,13 +276,13 @@ cro_cases(list(holiday, weathersit), df.tbl$dayofweek,
 
 <td style="text-align: right;">
 
-105
+103
 
 </td>
 
 <td style="text-align: right;">
 
-105
+103
 
 </td>
 
@@ -287,13 +294,13 @@ cro_cases(list(holiday, weathersit), df.tbl$dayofweek,
 
 <td style="text-align: right;">
 
-103
+102
 
 </td>
 
 <td style="text-align: right;">
 
-103
+105
 
 </td>
 
@@ -309,8 +316,6 @@ cro_cases(list(holiday, weathersit), df.tbl$dayofweek,
 
 <td style="text-align: right;">
 
-2
-
 </td>
 
 <td style="text-align: right;">
@@ -321,9 +326,13 @@ cro_cases(list(holiday, weathersit), df.tbl$dayofweek,
 
 <td style="text-align: right;">
 
+1
+
 </td>
 
 <td style="text-align: right;">
+
+1
 
 </td>
 
@@ -335,13 +344,11 @@ cro_cases(list(holiday, weathersit), df.tbl$dayofweek,
 
 <td style="text-align: right;">
 
-1
+2
 
 </td>
 
 <td style="text-align: right;">
-
-1
 
 </td>
 
@@ -367,31 +374,13 @@ cro_cases(list(holiday, weathersit), df.tbl$dayofweek,
 
 <td style="text-align: right;">
 
-63
-
-</td>
-
-<td style="text-align: right;">
-
-66
-
-</td>
-
-<td style="text-align: right;">
-
-67
-
-</td>
-
-<td style="text-align: right;">
-
 74
 
 </td>
 
 <td style="text-align: right;">
 
-67
+66
 
 </td>
 
@@ -407,6 +396,24 @@ cro_cases(list(holiday, weathersit), df.tbl$dayofweek,
 
 </td>
 
+<td style="text-align: right;">
+
+67
+
+</td>
+
+<td style="text-align: right;">
+
+63
+
+</td>
+
+<td style="text-align: right;">
+
+67
+
+</td>
+
 </tr>
 
 <tr>
@@ -419,31 +426,13 @@ cro_cases(list(holiday, weathersit), df.tbl$dayofweek,
 
 <td style="text-align: right;">
 
-41
-
-</td>
-
-<td style="text-align: right;">
-
-37
-
-</td>
-
-<td style="text-align: right;">
-
-34
-
-</td>
-
-<td style="text-align: right;">
-
 30
 
 </td>
 
 <td style="text-align: right;">
 
-34
+37
 
 </td>
 
@@ -459,6 +448,24 @@ cro_cases(list(holiday, weathersit), df.tbl$dayofweek,
 
 </td>
 
+<td style="text-align: right;">
+
+34
+
+</td>
+
+<td style="text-align: right;">
+
+41
+
+</td>
+
+<td style="text-align: right;">
+
+34
+
+</td>
+
 </tr>
 
 <tr>
@@ -470,6 +477,8 @@ cro_cases(list(holiday, weathersit), df.tbl$dayofweek,
 </td>
 
 <td style="text-align: right;">
+
+1
 
 </td>
 
@@ -487,7 +496,7 @@ cro_cases(list(holiday, weathersit), df.tbl$dayofweek,
 
 <td style="text-align: right;">
 
-1
+7
 
 </td>
 
@@ -499,13 +508,11 @@ cro_cases(list(holiday, weathersit), df.tbl$dayofweek,
 
 <td style="text-align: right;">
 
-4
-
 </td>
 
 <td style="text-align: right;">
 
-7
+4
 
 </td>
 
