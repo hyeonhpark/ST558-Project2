@@ -2596,8 +2596,7 @@ The results of the regression tree model and plot of the decision tree
 are displayed below.
 
 ``` r
-kable(fit.tree$results,
-      row.names = FALSE)
+kable(fit.tree$results)
 ```
 
 |        cp |     RMSE |  Rsquared |      MAE |
@@ -2657,22 +2656,22 @@ the result are provided below.
 kable(fit.boost$results[c(1,4,2,5)],
       col.names = c("Shrinkage",
                     "Boosting Iterations",
-                    "Maximum Tree Depth",
+                    "Max Tree Depth",
                     "RMSE"),
       row.names = FALSE)
 ```
 
-| Shrinkage | Boosting Iterations | Maximum Tree Depth |     RMSE |
-| --------: | ------------------: | -----------------: | -------: |
-|       0.1 |                  50 |                  1 | 822.7659 |
-|       0.1 |                  50 |                  2 | 755.0458 |
-|       0.1 |                  50 |                  3 | 775.0523 |
-|       0.1 |                 100 |                  1 | 770.0274 |
-|       0.1 |                 100 |                  2 | 745.4788 |
-|       0.1 |                 100 |                  3 | 741.6463 |
-|       0.1 |                 150 |                  1 | 749.4813 |
-|       0.1 |                 150 |                  2 | 762.7653 |
-|       0.1 |                 150 |                  3 | 749.2553 |
+| Shrinkage | Boosting Iterations | Max Tree Depth |     RMSE |
+| --------: | ------------------: | -------------: | -------: |
+|       0.1 |                  50 |              1 | 822.7659 |
+|       0.1 |                  50 |              2 | 755.0458 |
+|       0.1 |                  50 |              3 | 775.0523 |
+|       0.1 |                 100 |              1 | 770.0274 |
+|       0.1 |                 100 |              2 | 745.4788 |
+|       0.1 |                 100 |              3 | 741.6463 |
+|       0.1 |                 150 |              1 | 749.4813 |
+|       0.1 |                 150 |              2 | 762.7653 |
+|       0.1 |                 150 |              3 | 749.2553 |
 
 ``` r
 plot(fit.boost)
@@ -2689,16 +2688,16 @@ in Table 4 is chosen via cross validation method.
 #### Table 4. Values of tuning parameters from the final boosted tree model
 
 ``` r
-kable(fit.boost$bestTune[1:3],
+kable(fit.boost$bestTune[c(3,1,2)],
       col.names = c("Shrinkage",
                     "Boosting Iterations",
-                    "Maximum Tree Depth"),
+                    "Max Tree Depth"),
       row.names = FALSE)
 ```
 
-| Shrinkage | Boosting Iterations | Maximum Tree Depth |
-| --------: | ------------------: | -----------------: |
-|       100 |                   3 |                0.1 |
+| Shrinkage | Boosting Iterations | Max Tree Depth |
+| --------: | ------------------: | -------------: |
+|       0.1 |                 100 |              3 |
 
 ### Predictions on the test set
 

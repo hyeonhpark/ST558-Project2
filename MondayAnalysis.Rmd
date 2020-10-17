@@ -268,8 +268,7 @@ fit.tree <- train(cnt ~ yr + mnth + holiday + weathersit + avgTemp + hum + winds
 The results of the regression tree model and plot of the decision tree are displayed below.  
 
 ```{r regression-tree-final-model-results}
-kable(fit.tree$results,
-      row.names = FALSE)
+kable(fit.tree$results)
 fancyRpartPlot(fit.tree$finalModel,
                sub = "")
 ```
@@ -303,7 +302,7 @@ The result of the boosted tree model, displaying the different combinations of t
 kable(fit.boost$results[c(1,4,2,5)],
       col.names = c("Shrinkage",
                     "Boosting Iterations",
-                    "Maximum Tree Depth",
+                    "Max Tree Depth",
                     "RMSE"),
       row.names = FALSE)
 plot(fit.boost)
@@ -314,10 +313,10 @@ Model with the smallest RMSE value is chosen as the final boosted tree model. Fo
 
 #### Table 4. Values of tuning parameters from the final boosted tree model
 ```{r boosted-tree-final-model-parameters-table}
-kable(fit.boost$bestTune[1:3],
+kable(fit.boost$bestTune[c(3,1,2)],
       col.names = c("Shrinkage",
                     "Boosting Iterations",
-                    "Maximum Tree Depth"),
+                    "Max Tree Depth"),
       row.names = FALSE)
 ```
 
