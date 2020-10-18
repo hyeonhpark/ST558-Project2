@@ -194,7 +194,7 @@ detach(df.tbl.train)
 ```
 
 #### Table 3. Quantitative variables: Summary statistics  
-Minimum, median, mean, and max of the three qualitative variables (average temperature, humidity, and wind speed) are displayed.    
+Minimum, median, mean, and max of the three quantitative variables (average temperature, humidity, and wind speed) are displayed.    
 
 ```{r day-data-summary-statistics-table}
 df.tbl.train %>%
