@@ -15,6 +15,7 @@ Hannah Park
   - [Model Comparison](#model-comparison)
       - [Table 5. Comparison of root MSE values between
         models](#table-5.-comparison-of-root-mse-values-between-models)
+  - [Linear Regression Model](#linear-regression-model)
 
 # Introduction
 
@@ -89,7 +90,7 @@ url <- "https://archive.ics.uci.edu/ml/machine-learning-databases/00275/Bike-Sha
 download.file(url, "Bike-Sharing-Dataset.zip")
 unzip("Bike-Sharing-Dataset.zip", exdir = "./Data")
 
-df.bike <- read_csv("/Data/day.csv") %>%
+df.bike <- read_csv("Data/day.csv") %>%
   select(-instant, -casual, -registered) %>%
   mutate(dayofweek = dplyr::recode(weekday,
                             `0` = "Sunday",
@@ -171,6 +172,8 @@ attach(df.tbl)
 cro_cases(list(holiday, weathersit), df.tbl$weekday,
           total_row_position = "none")
 ```
+
+<!--html_preserve-->
 
 <table class="gmisc_table" style="border-collapse: collapse; margin-top: 1em; margin-bottom: 1em;">
 
@@ -560,6 +563,8 @@ cro_cases(list(holiday, weathersit), df.tbl$weekday,
 
 </table>
 
+<!--/html_preserve-->
+
 ``` r
 detach(df.tbl)
 ```
@@ -640,6 +645,8 @@ attach(df.tbl.train)
 cro_cases(list(yr, holiday,weathersit), mnth,
           total_row_position = "none")
 ```
+
+<!--html_preserve-->
 
 <table class="gmisc_table" style="border-collapse: collapse; margin-top: 1em; margin-bottom: 1em;">
 
@@ -1359,13 +1366,15 @@ cro_cases(list(yr, holiday,weathersit), mnth,
 
 </table>
 
+<!--/html_preserve-->
+
 ``` r
 detach(df.tbl.train)
 ```
 
 #### Table 3. Quantitative variables: Summary statistics
 
-Minimum, median, mean, and max of the three qualitative variables
+Minimum, median, mean, and max of the three quantitative variables
 (average temperature, humidity, and wind speed) are displayed.
 
 ``` r
@@ -1376,6 +1385,8 @@ df.tbl.train %>%
                Mean = w_mean, Max = w_max) %>%
   tab_pivot()
 ```
+
+<!--html_preserve-->
 
 <table class="gmisc_table" style="border-collapse: collapse; margin-top: 1em; margin-bottom: 1em;">
 
@@ -2497,6 +2508,8 @@ df.tbl.train %>%
 
 </table>
 
+<!--/html_preserve-->
+
 #### Figure 4. Qualitative variables: Boxplots
 
 Boxplots of qualitative variables (year, month, holiday and weather) are
@@ -2724,6 +2737,55 @@ kable(c("Regression Tree" = RMSE.tree, "Boosted Tree" = RMSE.boost),
 ```
 
 |                 |      RMSE |
-| --------------- | --------: |
+| :-------------- | --------: |
 | Regression Tree | 1460.1273 |
 | Boosted Tree    |  969.4305 |
+
+# Linear Regression Model
+
+This is part 2 of the project, performed by Jackie Steffan.
+
+Here I am creating a linear regression model. I used the variables
+Hannah used for her tree model to see if this would be a better
+predictor than the trees (which it most likely will not be).
+
+``` r
+linMod <- lm(cnt ~ yr + mnth + holiday + weathersit + avgTemp + hum + windspeed, data= df.train)
+preds <- cbind(df.test$cnt, predict(linMod, newdata= df.test))
+colnames(preds) <- c("Test Set", "Predictions")
+preds
+```
+
+    ##    Test Set Predictions
+    ## 1       959    456.2131
+    ## 2      1005   1389.1785
+    ## 3      5805   4629.3848
+    ## 4      5923   4690.5545
+    ## 5      4294   4225.1754
+    ## 6      5345   4902.0096
+    ## 7      5409   4997.6778
+    ## 8      5217   3703.5720
+    ## 9      4308   4188.9579
+    ## 10      627    295.8652
+    ## 11     3926   3133.2357
+    ## 12     3068   4121.0283
+    ## 13     3614   3613.3077
+    ## 14     1301   2905.8658
+    ## 15     4023   4541.7546
+    ## 16     2832   4207.5821
+    ## 17     2169   2369.5436
+    ## 18     6857   5191.5899
+    ## 19     6624   5605.2236
+    ## 20     6536   6840.3600
+    ## 21     8120   6554.6929
+    ## 22     7498   7516.2303
+    ## 23     4840   8344.1989
+    ## 24     6969   6950.5053
+    ## 25     6299   6488.1624
+    ## 26     5976   5865.3873
+    ## 27     8395   6421.7448
+    ## 28     8090   6687.2896
+    ## 29     7852   5604.4373
+    ## 30     5629   5473.9107
+    ## 31     5191   5526.0927
+    ## 32     1341   4796.0076
